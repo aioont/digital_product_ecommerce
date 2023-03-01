@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Cart {% endblock %}
+
+{% block content %} 
+<h2 class="text-2xl px-xl-5"> Cart </h2>
+
+    {% if cart|length %}
+    <!-- Cart Start -->
+    <div class="container-fluid">
+        <div class="row px-xl-5">
+            <div class="col-lg-8 table-responsive mb-5">
+                <table class="table table-light table-borderless table-hover text-center mt-5">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Products</th>
+                            <th>Original price</th>
+                            <th>Discount Price</th>
+                            <th>Remove</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody class="align-middle">
+                        {% for item in cart %}  <!-- in his code item in cart-->
+                        <tr>
+                            <td class="align-middle"> <img src="{{ item.product.image }}" alt="Image of " style="width: 50px;"> {{ item.product.title }} </td>
+                            <td class="align-middle"> $ {{ item.product.price }} </td>
+                            <td class="align-middle"> $ {{ item.product.discount_price }} </td>
+                            <td class="align-middle"><a class="btn btn-sm btn-danger" href="{% url 'remove_from_cart' item.product.id %}"><i class="fa fa-times"></i></button></td>                         
+                        </tr>
+                        {% endfor %}  
+                </table>
+            </div>
+        
+            <br><br>
+            
+            <div class="col-lg-4">
+                <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-heading pr-3">Cart Summary</span></h5>
+                
+                <div class="bg-dark p-30 mb-5">
+                    <div class="border-bottom pb-2">
+                        <div class="d-flex justify-content-between mb-3">
+                            <h6 class="text-light"> Total </h6>
+                            <h6 class="text-light"> $ {{ cart.get_total_cost }} </h6>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <h6 class="font-weight-medium text-light">Platform Service Charge</h6>
+                            <h6 class="font-weight-medium text-light"> $ 0.0 </h6>
+                        </div>
+                    </div>
+                    <div class="pt-2">
+                        <div class="d-flex justify-content-between mt-2">
+                            <h5 class="text-light">Total</h5>
+                            <h5 class="text-light">  $ {{ cart.get_total_cost }} </h5>
+                        </div>
+                        <a href="{% url 'checkout' %}" class="btn btn-block btn-primary font-weight-bold my-3 py-3">Proceed To Checkout</a>
+                    </div>
+                </div>       
+            </div>   
+        </div> 
+    </div>
+    
+    <!-- Cart End -->
+        {% else %}
+       <h2 style="text-align: center; color: crimson;">You don't have any product in cart yet !...</h2>
+      {% endif %}
+
+<div style="display: flex; justify-content: center; align-items: center;">
+    <a href="{% url 'contact' %}" class="h4 text-light bg-heading px-2 py-2 text-decoration-none"> Contact Support</a>
+</div>
+
+
+{% endblock %}
+
+
+
+{% block footer %}
+    {% include 'partials/footer.html' %}  
+{% endblock %} 

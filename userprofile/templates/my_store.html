@@ -1,0 +1,143 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} My account {% endblock %}
+
+
+{% block content %}
+    <h1> {% firstof user.get_full_name user.username %} store </h1>
+     <a href="{% url 'add_product'%}" class="btn-success btn ml-sm-5"> Add product </a>
+     <a href="#my-products" class="btn-success btn ml-sm-5"> My products </a>
+     <a href="#my-orders" class="btn-success btn ml-sm-5"> My orders </a>
+     <a href="#income" class="btn-success btn ml-sm-5"> My income </a>
+     <!-- <a href="" class="text-lg mb-4"> View {% firstof user.get_full_name user.username %} orders </a> #{ % url 'my_store_order_detail' pk=order_item.order.id % }" -->
+  
+   <hr>
+   <h4 style="color: rgb(41, 255, 41) !important; text-align: center; text-decoration: underline !important; text-decoration-color: #000;">
+    {% if messages %}
+        {% for message in messages %} 
+            {{ message }}
+        {% endfor %}
+    {% endif %}
+   </h4>
+
+    <h2 id="my-products">My products</h2>
+    {% if products %}
+    <div class="row px-xl-5 text-dark flex">
+            {% for product in products %}
+            <div class="col-lg-4 col-md-6 col-sm-6 pb-1 text-dark">
+               <div class="product-item bg-light mb-4">
+                   <div class="p-4 bg-gray-100">
+                      <a href="{% url 'product_detail' product.category.slug product.slug %}">
+                         {% if product.image %}
+                         <div class="product-img position-relative overflow-hidden">
+                            <img src="{{ product.image.url }}" alt="Image of {{ product.title }}" class="img-fluid">
+                         </div>
+                         {% endif %}
+                      </a>
+                      <h6 class="text-decoration-none text-truncate text-dark mt-2">Product name : {{ product.title }}</h6>
+                      <h6 class="text-decoration-none text-truncate text-dark mt-2">Selling price : $ {{product.discount_price}}</h6>
+                      <h6 class="text-decoration-none text-truncate text-dark mt-2">Original price : $ {{ product.price }}</h6>        
+                     
+                     <hr class="d-flex align-items-center justify-content-center ">
+                            <p> <strong> Quantity : </strong> {{ product.quantity }} </p>
+                            <p> <strong> Status : </strong> {{ product.get_status_display }} </p>
+                     
+                     <hr class="d-flex align-items-center justify-content-center ">
+                        {% if product %}
+                            <a href = "{% url 'delete_product' product.id %}" class="btn btn-danger"> Delete Product </a>
+                            <a href = "{% url 'edit_product' product.id %}" class="btn btn-danger ml-sm-5"> Edit Product </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% else %}
+         <p> You don't have any product yet </p>
+    {% endif %}
+
+    <hr>
+    <h2 id="my-orders">My orders</h2>
+
+
+    <style>
+        .table-td 
+        {
+            border: 2px solid rgb(65, 64, 69); 
+            border-radius: 4px;
+            background-color: #5B84B1FF;
+            color: beige;
+            margin-right: 2px; margin-left: 2px;
+            text-align: center;
+            width: 100%; height:100px;   
+        }
+        .table-th {
+           border-collapse: collapse;
+           background-color: #FC766AFF;
+           text-align: center;
+        }
+        
+    </style>
+
+
+
+<table class="table-td">
+    <thead class="table-th">
+        <tr>
+         <th>Order ID</th>
+         <th>Prouct Name</th>
+         <th>Price</th>
+         <th>Order Date</th>
+         <td>Order by </td>
+         <td>Email id of purchased</td>
+         <th>Paid amount</th>
+        </tr>
+    </thead>
+    <tbody>
+
+    {% for i in order_items %}
+    <tr>
+      <td> 
+        <a href="{% url 'my_store_order_detail' i.order.id %}"> {{ i.order.order_id }} </a>
+      </td>
+      <td> {{ i.product.title }} </td>
+      <td> $ {{ i.product.discount_price }}</td> <!-- Want to display the order price not product-->
+      <td> {{ i.order.created_at }} </td>
+      <td> {{ i.order.created_by }} </td>
+      <td> {{ i.order.email }}</td>
+      <td>$ {{ i.order.paid_amount }}</td>
+    </tr>
+    {% endfor %}      
+    
+    <tr> 
+        <td colspan="7">
+            <hr style="border-top: 2px solid #000; ">
+        </td>
+    </tr>
+    <tr id="income">
+        <td> Total </td> 
+        <td>$ {{ order_items.total }} </td>
+    </tr>
+  
+    </tbody>
+</table>
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,37 @@
+
+<style>
+    .alert {
+  margin-top: 3rem;
+  margin-bottom: 0;
+  text-align: center;
+}
+
+.alert h2 {
+  margin-bottom: 1rem;
+}
+
+.alert hr {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.alert a {
+  font-weight: bold;
+  color: #155724;
+}
+.alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+  }
+</style>
+<body class="alert-success">
+  <div class="container mt-5 center">
+    <div class="alert alert-success" role="alert">
+      <h2 class="alert-heading">Success...      !</h2>
+      <p>Your action completed successfully. Thank you</p>
+      <hr>
+      <p class="mb-0"><a href="{% url 'frontPage' %}">Home</a></p>
+    </div>
+  </div>
+</body>

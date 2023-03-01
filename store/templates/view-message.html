@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}   View messages |    
+{{ product.title }}
+{% endblock %}
+
+
+{% block content %}
+<body>
+    <h1>View Message Of {{ vendor.user }} </h1>
+    {% for i in vendor_msg %}
+    <ul class="text-dark">
+        <li>{{ vendor.vendor_msg.subject }}</li>
+    </ul>
+    {% endfor %}  
+   
+</body>
+{% endblock %}

@@ -1,0 +1,202 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Checkout {% endblock %}
+
+{% block content %}
+    <!-- Checkout Start -->
+<div class="text-dark">
+    <h2 class="text-2xl px-xl-5"> Checkout </h2>
+    {% if cart|length %}
+    <h2 style="text-align:center ">Total Cost : $ {{ cart.get_total_cost }} </h2> <hr>
+
+        
+    <div class="container-fluid">
+        {{ form.as_p }}
+        <div id="errors" class="hidden my-3 px-4 py-4 bg-red-200 rounded-xl"></div>
+        <!-- <div class="row px-xl-5">
+    
+                <div class="bg-light p-30 mb-5">
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <label for="first_name" id="id_first_name">First Name</label>
+                            { {form.first_name } }
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label for="last_name" id="id_last_name">Last Name</label>      
+                            { { form.last_name } } 
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label for="email" id="id_email">E-mail</label> 
+                            { { form.email } }
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label for="mobile" id="id_mobile">Mobile No</label>
+                            { { form.mobile } }
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label for="address" id="id_address">Address </label>
+                            { { form.address } }
+                        </div>
+                    </div>                              
+                </div>       
+        </div> -->
+
+            
+                <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-heading pr-3">Order Total</span></h5>
+                <div class="bg-light p-30 mb-5">
+                    <div class="border-bottom">
+                        <h6 class="mb-3 text-dark">Products</h6>
+                        <div class="d-flex justify-content-between">
+                          {% for cart in item %}
+                            <p> {{ item.product.title }} </p>
+                            <p> $ {{ item.product.price }} </p>
+                          {% endfor %}
+                        </div>
+                      
+                    </div>
+                    <div class="border-bottom pt-3 pb-2">
+                        <div class="d-flex justify-content-between mb-3">
+                            <h6 class="text-dark">Subtotal</h6>
+                            <h6 class="text-dark"> $ {{ cart.get_total_cost }} </h6>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <h6 class="font-weight-medium text-dark">Platform service charge</h6>
+                            <h6 class="font-weight-medium text-dark">$ 0.0</h6>
+                        </div>
+                    </div>
+                    <div class="pt-2">
+                        <div class="d-flex justify-content-between mt-2">
+                            <h5 class="text-dark">Total</h5>
+                            <h5 class="text-dark"> $ {{ cart.get_total_cost }} </h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-5">
+                    <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-heading pr-3">Payment</span></h5>
+                    <div class="bg-light p-30">
+                        <button class="btn btn-block btn-primary font-weight-bold py-3" onclick="buy(event)">Place Order</button>       
+                    </div>
+                </div> 
+        
+        </div>
+    </div>
+
+
+</div>
+{% else %}
+<h2 style="text-align: center; color: crimson;">Please add product to cart inorder to checkout !...</h2>
+{% endif %}
+
+    <!-- Checkout End -->
+{% endblock %}
+
+    {% block scripts %}
+        <script type="application/javascript" src="https://js.stripe.com/v3/" ></script>
+        <script>
+            function validate(first_name, last_name, email, mobile, address) {
+        let errors = [];
+
+        if (first_name == '') {
+            errors.push('The first name is missing');
+        }
+
+        if (last_name == '') {
+            errors.push('The last name is missing');
+        }
+
+        if (email == '') {
+            errors.push('The email is missing');
+        }
+
+        if (mobile == '') {
+            errors.push('The mobile number is missing');
+        }
+
+        if (address == '') {
+            errors.push('The address is missing');
+        }
+
+        let html = '';
+
+        for (let i = 0; i < errors.length; i++) {
+            html += errors[i] + '<br>';
+        }
+
+        let errorsElement = document.getElementById('errors');
+    
+        if (errors.length) {
+            errorsElement.classList.remove('hidden');
+            errorsElement.innerHTML = html;
+
+            return false;
+        } else {
+            errorsElement.classList.add('hidden');
+
+            return true;
+        }
+    }
+
+
+
+
+            function buy(event) {
+              event.preventDefault();
+
+              const first_name = document.getElementById('id_first_name').value;
+              const last_name = document.getElementById('id_last_name').value;
+              const email = document.getElementById('id_email').value;
+              const mobile = document.getElementById('id_mobile').value;
+              const address = document.getElementById('id_address').value;
+
+              if (validate(first_name, last_name,email, mobile, address)) {
+            let data = {
+                'first_name': first_name,
+                'last_name': last_name,
+                'email': email,
+                'mobile': mobile,
+                'address': address,
+            }
+       
+            let stripe = Stripe('{{ pub_key }}');
+
+            fetch('/cart/checkout/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                credentials: 'same-origin',
+                body: JSON.stringify(data)
+            })
+            .then(function(response) {
+                return response.json()
+            })
+            .then(function(session) {
+                return stripe.redirectToCheckout({ sessionId: session.session.id })
+            })
+            .then(function(result) {
+                if (result.error) {
+                    alert(result.error.message)
+                }
+            })
+            .catch(function(error) {
+                alert(error)
+            });
+        }
+
+        return false;
+    }
+  
+            
+        </script>
+    {% endblock %}
+
+
+{% block footer %}
+    {% include 'partials/footer.html' %}  
+{% endblock %} 
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>

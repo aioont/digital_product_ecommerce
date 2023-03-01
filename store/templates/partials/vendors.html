@@ -1,0 +1,34 @@
+{% load static %}
+
+{% block vendors %}
+<h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-heading pr-3"> Vendors </span></h2>
+
+{% if vendors %}
+<div class="container-fluid py-5">
+    <div class="row px-xl-5">
+        <div class="owl-carousel vendor-carousel">
+        {% for i in vendors %}
+          <div  class="ml-1 mr-1 text-center bg-vendor">
+            {% if vendors.image %}
+                <div class="overflow-hidden img-thumbnail" style="width: 150px; height: 100px;">
+                    <img src="{{ i.vendor_image.url }}" alt="vendor_image" class="img-thumbnail">
+                </div>
+                {% else %}
+                    <div class="product-img position-relative overflow-hidden">
+                        <img class="img-fluid" src="{% static 'img/no-img.png' %}" alt="No image">   
+                    </div>
+                {% endif %}
+             
+                <div class="text-center py-4">
+                    <a class="h6 text-decoration-none text-truncate text-dark" href="">{{ i.vendor_name }}</a>
+                </div>
+            </div>
+        {% endfor %}       
+        </div>
+    </div>
+</div>         
+{% else %}
+<center><h3 class="text-dark">No vendors to shows</h3></center>
+{% endif %}
+
+{% endblock %}

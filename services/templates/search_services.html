@@ -1,0 +1,115 @@
+{% load static %}
+
+<title> Search for services </title>
+<head>
+    <!-- Libraries Stylesheet -->
+    <link href="{% static 'lib/animate/animate.min.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'lib/easing/easing.min.js' %}"></script>
+    <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
+
+
+    <!-- Template Javascript -->
+    <script src="{% static 'js/main.js' %}"></script>
+
+</head>
+
+
+
+<h3 class="text-2xl text-dark">Search results for "{{ service_query }}":</h3> 
+{% if services %}
+<hr>
+<h4 class="text-dark">Services matching {{ service_query }}:</h4> 
+<div class="row px-xl-5 text-light flex">
+    {% for i in services %}
+       <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+           <div class="product-item bg-card-gray mb-3">
+
+               {% if i.image %}
+               <div class="product-img position-relative overflow-hidden">
+                 <img class = "img-fluid" src="{{ i.image.url }}" alt="Image of {{ i.title }}">   
+               </div> 
+               {% else %}
+                <div class="product-img position-relative overflow-hidden">
+                    <img class="img-fluid" src="{% static 'img/no-img.png' %}" alt="No image">   
+                </div>
+                {% endif %}  
+                
+                <div class="text-center py-4">
+                    <a class="h6 text-decoration-none text-truncate" href="">  {{ i.title }} </a>
+                    <div class="d-flex align-items-center justify-content-center mt-2">
+                        <span> {{ i.service_provider.sp_name }} <span>  
+                        <p>{{ i.stars }} <span style="font-size:24px;">&#x2605;</span></p>
+                    </div>
+                </div>
+            </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+{% if service_provider %}
+<hr>
+<h4 class="text-dark">Service providers matching {{ service_query }}:</h4> 
+<div class="row px-xl-5 text-light flex">
+    {% for i in service_provider %}
+       <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+           <div class="product-item bg-card-gray mb-3">
+
+               {% if i.image %}
+               <div class="product-img position-relative overflow-hidden">
+                 <img class = "img-fluid" src="{{ i.sp_image.url }}" alt="Image of {{ i.sp_name }}">   
+               </div> 
+               {% else %}
+                <div class="product-img position-relative overflow-hidden">
+                    <img class="img-fluid" src="{% static 'img/no-img.png' %}" alt="No image">   
+                </div>
+                {% endif %}  
+                
+                <div class="text-center py-4">
+                    <a class="h6 text-decoration-none text-truncate" href="">  {{ i.sp_name }} </a>
+                    <div class="d-flex align-items-center justify-content-center mt-2">
+                        <p>{{ i.sp_star }} <span style="font-size:24px;">&#x2605;</span></p>
+                    </div>
+                </div>
+                
+            </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+{% if service_provider is None and service is None %}
+<hr>
+    <p class="text-dark h4">No service provider or service found.</p>
+{% endif %}
+
+
+
+ 
+
+    
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      

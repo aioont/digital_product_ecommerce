@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %} Edit Product {{ title }} {% endblock %}
+
+{% load static %}
+<link href="{% static 'css/style.css' %}" rel="stylesheet">
+
+{% block content %}
+  <h1 class="text-dark mb-4">Edit Product</h1>
+  <section class="h-100">
+    <div class="container h-100">
+      <div class="row justify-content-sm-center h-100">
+        <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-7 col-sm-9">
+          <form method="POST" enctype="multipart/form-data" class="needs-validation text-dark">
+            {% csrf_token %}
+                
+            {{ form.as_p }}
+            <div class="align-items-center d-flex justify-content-center mb-3">
+              <input type="submit" value="Save changes" class="btn btn-primary ms-auto">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  
+{% endblock %}
+
+
+
+
+
+
+
+
+
+

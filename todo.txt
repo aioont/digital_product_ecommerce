@@ -1,0 +1,13 @@
+1. featured product returns inverted
+2. vendor link not works
+3. rating printing not working
+4. payment
+5. reduce quanity when ordered
+6. fix service urls
+** box-sizing class to fix different height for product card
+
+
+
+
+
+

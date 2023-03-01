@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load menu %}
+
+       {% block title %} Shop {% endblock %}
+
+
+{% block content %} 
+
+
+{% if products %}
+<div class="row px-xl-5">
+    {% for product in products %}
+    <div class="col-lg-3 col-md-4 col-sm-6 pb-1 text-dark">
+        <div class="product-item bgof mb-4 pb-4">
+                 {% if product.image %}
+                 <div class="product-img position-relative overflow-hidden">
+                    <img src="{{ product.image.url }}" alt="Image of {{ product.title }}" class="img-fluid w-100">
+                 </div>
+                 {% endif %}
+              </a>
+              <div class="text-center py-4">
+                <a class="h6 text-decoration-none text-truncate" href="{% url 'product_detail' product.category.slug product.slug %}">  {{ product.title }} </a>
+                <h6 class="text-decoration-none text-truncate text-dark mt-2">Selling price : $ {{product.discount_price}}</h6>
+                <h6 class="text-decoration-none text-truncate text-dark mt-2">Original price : $ {{ product.price }}</h6>        
+             
+                <hr class="d-flex align-items-center justify-content-center ">
+                    <p> <strong> Quantity : </strong> {{ product.quantity }} </p>
+                    <p> <strong> Status : </strong> {{ product.get_status_display }} </p>
+              </div>
+        </div>
+    </div>
+    {% endfor %}
+    {% else %}
+         <p> Sorry we don't have any product yet </p>
+    {% endif %}
+</div>
+
+{% endblock %}                 
+                    
+                    
+
+
+                    
+         
+

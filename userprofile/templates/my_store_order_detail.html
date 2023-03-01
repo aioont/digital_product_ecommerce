@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Order detail - {{ order.id }} {% endblock %}
+
+
+
+{% block content %}
+    <h1> Order detail - {{ order.id }} </h1>
+    <h2>My products in this order </h2>
+    
+    <style>
+        .table-td 
+        {
+            border: 2px solid rgb(65, 64, 69); border-radius: 4px;
+            background-color: #5B84B1FF;
+            color: beige;
+            margin-right: 2px; margin-left: 2px;
+            text-align: center;
+            width: 100%; height:100px;   
+        }
+        .table-th {
+           border-collapse: collapse;
+           background-color: #FC766AFF;
+           text-align: center;
+        }
+        
+    </style>
+
+
+
+<table class="table-td">
+    <thead class="table-th">
+        <tr>
+         <th>Prouct Name</th>
+         <th>Total</th>
+         <th>Order Date</th>
+         <td>Order by </td>
+        </tr>
+    </thead>
+    <tbody>
+
+     {% for item in order.items.all %}
+        {% if item.product.user == request.user %}
+        <tr>
+            <td> {{ item.product.title }} </td>
+            <td> $ {{ item.product.price }}</td> <!-- Want to display the order price not product-->
+            <td> {{ item.order.created_at }} </td>
+            <td> {{ item.order.created_by }} </td>
+          </tr>
+        {% endif %}
+    {% endfor %}
+   
+    
+</tbody>
+</table>  
+{% endblock %}

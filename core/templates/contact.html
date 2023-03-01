@@ -1,0 +1,88 @@
+{% load static %}
+
+{% load menu %}
+
+
+{% block contactform %}
+
+<html lang="en">
+
+<head>
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+</head>
+
+<body>
+   
+    <a href= "{% url 'frontPage' %}" class="btn bgof text-dark" style="margin-top: 2%; margin-left: 4%; margin-bottom: 1%;" > Go back to homepage </a>
+    <!-- Contact Start -->
+    <div class="container-fluid">
+        <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-heading pr-3">Contact Us</span></h2>
+        <div class="row px-xl-5">
+            <div class="col-lg-7 mb-5">
+                <div class="contact-form bg-light p-30">
+                    <div id="success"></div>
+
+                    <form method="POST" >
+                    {% csrf_token %}
+                        <div class="control-group">
+                               {{form.full_name}}
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group">
+                               {{form.mail}}
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group">
+                                          {{form.msg_subject}}
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group">
+                              {{form.msg_content}}
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div>
+                            <button class="btn bgof py-2 px-4 text-dark" >Send
+                                Message</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+{% endblock %} 
+
+            <div class="col-lg-5 mb-5">
+                <div class="bg-light p-30 mb-30 text-dark">Map commented
+                  <!--  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d125218.43034658745!2d75.72824071234032!3d11.255823359334752!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba65938563d4747%3A0x32150641ca32ecab!2sKozhikode%2C%20Kerala!5e0!3m2!1sen!2sin!4v1673059523426!5m2!1sen!2sin" style="width: 100%; height: 250px; frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe> -->
+                </div>
+                <div class="bg-light p-30 mb-3 text-dark ">
+                    <p class="mb-2"><i class="fa fa-map-marker-alt mr-3">Kozhikode,Kerala,India</i></p>
+                    <p class="mb-2"><i class="fa fa-envelope mr-3"></i>admin@gmail.com</p>
+                    <p class="mb-2"><i class="fa fa-phone-alt mr-3"></i>+91 1234567890</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Contact End -->
+
+   
+{% block contacts %}
+        {% include 'partials/footer.html' %}  
+{% endblock %} 
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up">^^</i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'lib/easing/easing.min.js' %}"></script>
+    <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
+
+
+    <!-- Template Javascript -->
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+
+</html>
