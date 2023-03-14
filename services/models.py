@@ -41,7 +41,7 @@ class ProviderMessage(models.Model):
     message = models.TextField(max_length=200) 
     # To Do
     
-    vendor = models.ForeignKey(Vendor, related_name='messages', on_delete=models.CASCADE)
+    vendor = models.ForeignKey(Vendor, related_name='messages', on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.name

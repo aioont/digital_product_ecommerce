@@ -34,40 +34,6 @@ def view_messages(request, vendor_name):
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 def success(request):
     return render(request, 'success.html')
 
@@ -207,6 +173,8 @@ def product_detail(request, category_slug, slug):
     productss = Product.objects.all()
     product = get_object_or_404(Product, slug=slug, status=Product.ACTIVE)
     simliar = Product.objects.filter(status=Product.ACTIVE)[0:4]
+    ratings = [product.rating]
+    print(ratings)
     
     if request.method == 'POST':
         form = MessageSellerForm(request.POST)
@@ -228,4 +196,5 @@ def product_detail(request, category_slug, slug):
         'simliar': simliar,
         'form': form,
         'productss': productss,
+        'ratings': ratings
     })

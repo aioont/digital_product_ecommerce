@@ -99,6 +99,9 @@
                                 <small class="fas fa-star-half-alt"></small>
                                 <small class="far fa-star"></small>
                             </div>
+                            {% for i in rating %}
+                            <small class="fas fa-star"></small>
+                            {% endfor %}
                             <small class="pt-1 text-dark">{{ product.rating }}</small>
                         </div>
                         <div class="d-flex align-items-center mb-4 pt-2">
