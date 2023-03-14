@@ -3,6 +3,8 @@ from django.db import models
 from django.conf import settings
 # from userprofile.models import BecomeVendor
 
+from django.core.validators import MaxValueValidator, MinValueValidator
+
 
 User = settings.AUTH_USER_MODEL
 
@@ -53,7 +55,17 @@ class Product(models.Model):
 
     def __str__(self):
         return self.title
+
     
+    
+
+class Rating(models.Model):
+    product = models.ForeignKey(Product, related_name='ratings', on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name='ratings', on_delete=models.CASCADE)
+    value = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])
+
+    class Meta:
+        unique_together = ('product', 'user')
 
 
 class Vendor(models.Model):

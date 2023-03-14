@@ -20,7 +20,7 @@
                 {% endif %}
              
                 <div class="text-center py-4">
-                    <a class="h6 text-decoration-none text-truncate text-dark" href="">{{ i.vendor_name }}</a>
+                    <a class="h6 text-decoration-none text-truncate text-dark" href="{% url 'vendor_detail' vendor_id=i.id %}">{{ i.vendor_name }}</a>
                 </div>
             </div>
         {% endfor %}       

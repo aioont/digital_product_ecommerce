@@ -149,3 +149,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'userprofile.CustomUser'
 
 
+CSRF_TRUSTED_ORIGINS = ['https://noelsj007-potential-giggle-7x57qpxr5qw2prjw-8000.preview.app.github.dev']

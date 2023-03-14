@@ -99,9 +99,20 @@
                                 <small class="fas fa-star-half-alt"></small>
                                 <small class="far fa-star"></small>
                             </div>
-                            {% for i in rating %}
-                            <small class="fas fa-star"></small>
-                            {% endfor %}
+                            {% if product.ratings.all %}
+                            <div class="ratings">
+                                {% with product.average_rating as average_rating %}
+                                {% for i in "12345" %}
+                                    {% if i <= average_rating %}
+                                    <span class="fa fa-star checked"></span>
+                                    {% else %}
+                                    <span class="fa fa-star"></span>
+                                    {% endif %}
+                                {% endfor %}
+                                <span class="average-rating">{{ average_rating|floatformat:"1" }}</span>
+                                {% endwith %}
+                            </div>
+                            {% endif %}
                             <small class="pt-1 text-dark">{{ product.rating }}</small>
                         </div>
                         <div class="d-flex align-items-center mb-4 pt-2">
