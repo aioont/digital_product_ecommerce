@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} {{ category.title }} {% endblock %}
+
+{% block content %} 
+<h1 class="text-2xl">{{ category.title }} products</h1>
+
+    {% include 'partials/products.html' %}  
+
+{% endblock %}
+
+
+<!-- Vendor Start -->
+{% block vendors %}
+    {% include 'partials/vendors.html' %}  
+{% endblock %}
+<!-- Vendor End -->

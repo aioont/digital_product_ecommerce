@@ -1,0 +1,48 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Completed Orders</title>
+  </head>
+  <body>
+    <h1>Completed Orders</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Order ID</th>
+          <th>Customer Name</th>
+          <th>Product Name</th>
+          <th>Vendor Name</th>
+          <th>Price</th>
+          <th>Payment Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for order in completed_orders %}
+          {% for item in order.items.all %}
+            <tr>
+              <td>{{ order.order_id }}</td>
+              <td>{{ order.full_name }} </td>
+              <td>{{ item.product.title }}</td>
+              <td>{{ item.product.vendor }}</td>
+              <td>{{ item.get_display_price }}</td>
+              <td>{% if order.is_paid %}Paid{% else %}Pending{% endif %}</td>
+              <td>{% if not order.is_paid %}
+                    <form method="POST" action="{% url 'send_payment' %}">
+                      {% csrf_token %}
+                      <input type="hidden" name="order_id" value="{{ order.order_id }}">
+                      <input type="hidden" name="vendor_name" value="{{ item.product.vendor }}">
+                      <input type="number" name="amount" placeholder="Enter amount">
+                      <button type="submit">Send Payment</button>
+                    </form>
+                  {% endif %}
+              </td>
+            </tr>
+          {% endfor %}
+        {% endfor %}
+      </tbody>
+    </table>
+  </body>
+</html>

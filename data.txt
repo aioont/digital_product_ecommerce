@@ -1,0 +1,190 @@
+=========================
+username:   admin
+email:      admin@gmail.com
+mobile:     1234567890
+password:   admin123
+=========================
+
+cmd
+
+cd ../env/Scripts
+activate
+cd ../../dpe3
+python manage.py runserver
+
+python manage.py makemigrations
+python manage.py migrate
+
+https://github.com/SteinOveHelset/interiorshop
+test@gmail.com
+ertyuiop
+
+
+
+What Is a Digital Product?
+A digital product is any product you sell online that doesn’t have a physical form or substance. You can’t hold a website template in your hand, smell an e-book, or taste a software program — Uber eats does come close though ; ).
+
+You can turn digital products into physical products. For instance, many people buy e-books in PDF format, then print them on their computers. The product becomes physical, but it started out in a digital format.
+
+Courses
+eBooks
+Photography 
+Music
+Web Elements
+Research and Data
+Tutorials and Guides
+Software Programs
+Recipes
+Apps
+Podcasts
+Printables
+Templates and Calculators
+Graphic Arts Bundles
+Coaching Packages
+
+==========================================================================================
+Ebooks and PDF resources: This can include fiction and practical guides
+Software: Widgets, apps, themes, and plugins make great digital products
+Digital media: Consider selling podcasts, short videos, stock photography or other types of digital media
+Graphics and digital art: Put your design skills to use by creating and selling your art
+Online courses and communities: Creating an online course is easier than ever and a great way to share your expertise. Communities can also help build authority in your field.
+
+1.Membership site: Set up a site with exclusive content that customers can access through a monthly or yearly subscription. 
+
+2. Planners and journals: Share your lifestyle tips and routines in a printable PDF.
+
+3. Podcasts: Interview influential people in your field and share insider tips and ideas. Here are some of our favorite digital marketing podcasts for inspiration and a podcast email marketing guide to help promote your show. 
+
+4. Downloadable guides: Make them relevant to what you blog about. For example, handicraft experts could create an ebook or PDF guide to teach followers about a specific craft. 
+
+5. Paid newsletters: Set up a paid newsletter that goes deep into the topics your blog discusses. Use your blog to drive signups and traffic. For example, A Media Operator has a free newsletter and blog that it uses to promote a weekly paid newsletter.
+
+6. Beginner’s guide to freelancing: Write an ebook on how you started freelancing.
+
+7. E-learning course: Create a certified course about your profession. 
+
+8. Online community: HerSuiteSpot has created a platform of mentors and resources for female entrepreneurs and freelancers.
+
+9. Paid newsletter: Share meditations, guides and tutorials via a paid newsletter subscription. Read this article to find out more about how to start and run a paid newsletter. 
+
+10. Meditation audio: Sell 10-15 minute audio recordings of meditations and mindfulness exercises. 
+
+11. Video courses: Create a video series of coping strategies, grounding techniques and wellness tips. 
+
+12. Printable journals and wellness trackers: We love this wellness planner being sold by IlluminateCommunications. 
+13. Wallpapers: Everyone loves a nice background for their desktop or smartphone. 
+
+14. Emojis: Why not create some unique emojis for your customers to help their messages stand out? 
+
+15. Posters: Get arty and design printable posters buyers can use to decorate their space. 
+
+16. Fonts: Create special text styles and fonts and sell them to your audience. 
+
+17. Photoshop templates: You could offer product mockups, effects, layouts and more. 
+
+18. Business card templates: Help your customers look professional with stylish business card templates. 
+
+19. Infographic design templates: These are great when people want to clearly present a lot of data and information. 
+
+20. Presentation templates: Give your customers a presentation design that stands out. 
+
+21. Invitation templates: Help people make an impression at their big event. They’re especially useful for weddings! 
+
+22. Comic templates: Graphic novelists and comic artists will be fighting to get their hands on these! 
+
+23. Printout origami: If you enjoy origami, create printable templates to help others join in the fun. 
+
+24. 3D printer design files: Share your 3D printable files with your online community. 
+
+25. Icon sets: Give people unique icon sets for their website or landing page. 
+
+26. Animations: If you’re a whizz at animations, sell them to video creators and YouTubers. 
+
+27. Premade graphic designs: Create ready-made designs you can sell online. 
+
+28. Create a website design checklist: Alberta Designs is website design agency. It offers this checklist to reach an audience beyond its design clients. 
+
+29. Apps: Once you’ve designed your mobile app, you can either add a paid plan or in-app purchases. 
+
+30. Video games: You could create a video game series and monetize it through subscriptions, in-app purchases, or simply through selling the game for a one-off fee. 
+
+31. Website themes: Sell premade themes that customers can download and use on their website. 
+
+32. Browser plugins: Create software to let users customize the browsing experience. 
+
+33. Hosting: Provide a web server where clients can store their files and data. 
+
+34. Code snippets: Share reusable code for your customers to use on their sites. 
+
+35. Integrations: Build a product that integrates with another. For example, Collect.Chat is a chatbot integration you can easily add to your website. 
+
+36. Business podcast: Audio content is more popular than ever, and it’s easy to produce! All you need is a USB microphone, free editing software like Audacity, and a podcast hosting platform. 
+
+37. Resume templates: Sell CV templates to help your customers get hired. 
+
+38. Careers advice ebook: Write an ebook to share your experiences and insights. 
+
+39. Job newsletter: Create a weekly paid newsletter that sends out the best job opportunities in your industry. 
+
+40. Masterclasses: Share your specialized knowledge in an e-learning series. 
+
+41. Online communities and resources: Create a community to help people in your industry connect. For example, Superpath is a community for content marketers. 
+
+42. Fiction and non-fiction ebooks: Your ideas and creativity can be a key source of income if you publish and sell ebooks. 
+
+43. Deleted chapters, spin-offs, short stories and extra scenes: Capitalize on the popularity of a book by publishing extra story snippets for your readers to buy. 
+
+44. Self-publishing guides: Many writers are interested in self-publishing, but feel overwhelmed by all the steps needed for a successful launch. If you’ve already been through the process, share what you learned. 
+
+45. Novel planning sheet: Many people have great ideas for books, but they aren’t sure how to map them out. Create a downloadable planning sheet to take out the guesswork. 
+
+46. Ebooks about writing: Create a book writing kit for your audience to download. 
+
+47. Private proofreading community: Set up a private community where writers can share their projects and give each other constructive feedback. Critique Circle is a good example with both free and paid membership levels.
+
+62. Downloadable songs: Sell your songs online, with different pricing for personal or commercial use. 
+
+63. Online course: Create an online course that teaches how to play your instrument.  
+
+64. Sound effects: Sell sound effects to video and music creators. 
+
+65. Voiceovers: Create downloadable premade voiceovers. 
+
+66. Instrumental tracks: Build a gallery of instrumental tracks for people to buy. 
+
+67. Beats: Create beats and sell them online. Brad Kins Beats is an e-commerce platform that does just that.
+
+73. Short films: You could sell premade short films to festivals. Or use a tool like Vimeo to sell videos directly to your audience.
+
+74. Video animation intros: YouTubers will go crazy for premade introduction templates that they can add to their videos. 
+
+75. Stock video: Maybe you filmed a battle reenactment or footage of a rare animal. Other videographers will be keen to get their mitts on them, so why not sell them as stock footage?
+
+76. Videography tutorials: Show beginner videographers how you got started, the equipment you use, and the best filming techniques in your field. 
+
+77. LUTs and presets: Check out the example below from Jeven Dovey, who sells preset video colors that other videographers can use.
+
+
+
+
+
+eBooks
+Software
+Web-based Applications
+Graphics and Digital Art
+Cloud Design App Templates
+Fonts
+Music and Audio
+Photography
+Video
+Documents
+Spreadsheets
+Courses
+Professional Services
+Tickets
+
+
+python manage.py makemigrations userprofile
+python manage.py makemigrations services
+python manage.py makemigrations store  
+python manage.py makemigrations core

@@ -1,0 +1,20 @@
+{% load static %}
+
+<link href="{% static 'css/forms.css' %}" rel="stylesheet">
+
+<h1>Contact admin</h1>
+<p>Request form to add your services and list your profile</p>
+<div class="forms-design">
+    <form method="POST">
+    {% csrf_token %}
+    <div class="zblock">
+        {{ form.as_p }}
+    </div>
+    <button type="submit">Send Message</button>
+  </form>
+</div>
+
+
+
+
+

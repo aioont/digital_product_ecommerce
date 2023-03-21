@@ -1,0 +1,46 @@
+{% load static %}
+
+{% if products %}
+ <div class="row px-xl-5 text-dark flex">
+        {% for product in products %}
+           <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+               <div class="product-item bgof mb-4">
+
+                   {% if product.image %}
+                   <div class="product-img position-relative overflow-hidden">
+                     <img class = "img-fluid" src="{{ product.image.url }}" alt="Image of {{ product.title }}">    
+                   </div>
+                   {% else %}
+                        <div class="product-img position-relative overflow-hidden">
+                            <img class="img-fluid" src="{% static 'img/no-img.png' %}" alt="No image">   
+                        </div>
+                    {% endif %} 
+                    
+                    <div class="text-center py-4">
+                        <a class="h6 text-decoration-none text-truncate" href="{% url 'product_detail' product.category.slug product.slug %}">  {{ product.title }} </a>
+                        <div class="d-flex align-items-center justify-content-center mt-2">
+                            <h5>  $ {{ product.discount_price }} </h5>
+                            <h6 class="text-muted ml-2"><del> $ {{ product.price }} </del></h6>
+                        </div>
+                              <br> 
+                                <h5>Seller : {% firstof product.user.get_full_name product.user.username %} <-> Available : {{ product.quantity }}</h5>
+                                    
+                        
+
+                        <div class="d-flex align-items-center justify-content-center mb-1">
+                            {% for i in product_rating %}
+                                <small class="fa fa-star text-primary mr-1"></small>
+                            {% endfor %}
+                
+                            <small>({{ product.sold }})</small>
+                        </div>
+                    </div>
+                    
+                </div>
+        
+        </div>
+        {% endfor %}
+</div>
+{% else %}
+<center><h3 class="text-dark">No products to shows</h3></center>
+{% endif %}

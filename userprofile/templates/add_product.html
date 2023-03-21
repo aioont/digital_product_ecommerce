@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %} Add product {{ title }} {% endblock %}
+
+{% load static %}
+<head> 
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    input[type="email"], input[type="text"] {
+        width: 100%;
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        color: #333;
+        border: none;
+        background-color: #f2f2f2;
+    }    
+</head>
+
+{% block content %}
+  <h1 class="text-dark mb-4">Add Product</h1>
+  <section class="h-100">
+    <div class="container h-100">
+      <div class="row justify-content-sm-center h-100">
+        <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-7 col-sm-9">
+          <form method="POST" enctype="multipart/form-data" class="needs-validation text-dark">
+            {% csrf_token %}
+                
+            {{ form.as_p }}
+            <div class="align-items-center d-flex justify-content-center mb-3">
+              <input type="submit" value="Add Product" class="btn btn-primary ms-auto">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  
+{% endblock %}
+
+

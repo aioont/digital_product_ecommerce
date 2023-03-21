@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Search {% endblock %}
+
+{% block content %} 
+<h2 class="text-2xl">Search</h2>
+<h3 class="text-2xl">Search results for "{{ query }}":</h3>
+
+    {% if products %}
+        {% include 'partials/products.html' %}  
+    
+    {% else %}
+        <p>There are no products matching this querry!</p>
+    {% endif %}
+
+<!-- Vendor Start -->
+<div class="container-fluid py-5">
+    <div class="row px-xl-5">
+        <div class="col">
+            <div class="owl-carousel vendor-carousel">
+                <div class="bg-light p-4">
+                    <img src="{% static 'img/vendor-1.jpg' %}" alt="Vendors Imagae"> <!--DISPLAY VENDOR NAMES/IMAGES HERE-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Vendor End -->
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,147 @@
+{% load static %}
+<html>
+<head>
+    <title>Digital Services </title>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+        <link href="{% static 'css/style.css' %}" rel="stylesheet">
+
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body>
+    <div class="container-fluid bg-services-navbar mb-30">  <!--prevoius bg-dark-->
+        <div class="row">
+            <div class="col-lg-3 d-none d-lg-block bg-light">
+                <a class="btn d-flex align-items-center justify-content-between mt-2" data-toggle="collapse" href="#navbar-vertical" style="height: 40px; padding: 0 30px;">
+                    <h6 class="m-0 text-dark"><i class="fa fa-bars mr-2"></i> Services </h6>
+                    <i class="fa fa-angle-down"></i>
+                </a>
+
+
+                <nav class="collapse position-absolute navbar navbar-vertical navbar-dark align-items-start p-0 bg-dark mt-3" id="navbar-vertical" style="width: calc(100% - 15px); z-index: 999; overflow-y: auto; max-height: 500px;">
+                    <div class="navbar-nav">
+                        <div class="nav-item dropdown dropright">
+                        {% for i in all_services %}
+                            <a href="{% url 'services' %}" class="nav-item nav-link" > {{ i.title }} </a>
+                        {% endfor %} 
+                        </div>
+                    </div>
+                </nav>
+            </div>
+
+            <div class="col-lg-4 col-6 text-left mt-3 w-100">
+                <form method="get" action="{% url 'search_services' %}">
+                    <div class="search-container" style="width: 400px !important">
+                        <input type="text" class="form-control btn-light" placeholder="Search a services or service providers" name="service_query">
+                        <button class="search-icon">
+                        <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+
+            <div class="mt-3">
+                <a href="{% url 'frontPage' %}" class="text-dark mr-3 font-weight-bolder"> Goto Home </a>
+                <a href="#" class="text-dark mr-3 font-weight-bolder"> View all services </a>
+                {% if request.user.is_authenticated %}
+                    <a href="{% url 'contactAdmin' %}" class="text-dark mr-1 font-weight-bolder"> Request to add a services </a>
+                {% endif %}
+            </div>
+
+            <div class="dropdown mr-5 mt-2 ml-5">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <!-- removed nav-link from class name because of black outline-->
+                    <img src="{% static 'img/user4.png' %}" alt="My account" height="35px" width="35px">
+                </a>
+                <div class="dropdown-menu bg-light rounded-lg border-0">
+                    {% if request.user.is_authenticated %}
+                        <a class="dropdown-item" href="{% url 'myaccount' %}">Profile</a > <!--Set url 'myaccount'-->
+
+                        {% if request.user.is_vendor %}
+                            <a class="dropdown-item" href="{% url 'my_store' %}">My store</a>
+                        {% else %}
+                            <a class="dropdown-item" href="{% url 'become_vendor' %}"> Become a vendor </a>
+                        {% endif %} 
+                        
+                        <a class="dropdown-item" href="{% url 'logout' %}">Logout
+                            <img src="{% static 'img/logout.png' %}" alt="Logout" height="20px" width="20px">
+                        </a>
+                        {% else %}
+                    <a class="dropdown-item" href="{% url 'login' %}">Log in</a>
+                    <a class="dropdown-item" href="{% url 'signup' %}">Register</a>    
+                    {% endif %} 
+                </div>
+            </div> 
+        </div>
+    </div>
+
+    <h2 class="position-relative mx-xl-5 mb-4"><span class="bg-heading-violet pr-3 custom-select-lg"> Popular Service Providers </span></h2>
+    <div class="row px-xl-5 text-dark">
+        {% for i in popular_service_providers %}
+            <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+                <div class="product-item bg-services-light mb-4">
+                {% if i.sp_name %}
+                    {% if i.sp_image %}
+                        <div class="product-img position-relative overflow-hidden">
+                            <img class = "img-fluid" src="{{ i.sp_image.url }}" alt="Image of  {{ i.sp_name }}">  
+                        </div>
+                    {% else %}
+                        <div class="product-img position-relative overflow-hidden">
+                            <img class="img-fluid" src="{% static 'img/no-img.png' %}" alt="No image">   
+                        </div>
+                    {% endif %}   
+                <div class="text-center py-4 bg-card-gray">
+                    <a class="h6 text-decoration-none text-truncate" href="">   {{ i.sp_name }} </a>
+                </div>
+                {% else %}
+                <hr>
+                    <p class="text-dark h3"> Service provider do not exist. </p>
+                {% endif %}
+                </div>             
+            </div>  
+            {% endfor %}
+    </div>
+
+
+
+
+
+<h2 class="position-relative mx-xl-5 mb-4"><span class="bg-heading-violet pr-3 custom-select-lg"> Popular Services </span></h2>
+<div class="row px-xl-5 text-dark">
+    {% for i in popular_services %} 
+        <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+            <div class="product-item bg-services-light mb-4">
+
+                {% if i.image %}
+                    <div class="product-img position-relative overflow-hidden">
+                        <img class="img-fluid" src="{{ i.image.url }}" alt="Image of {{ i.title }}">   
+                    </div>
+                {% else %}
+                <div class="product-img position-relative overflow-hidden">
+                    <img class="img-fluid" src="{% static 'img/logo.png' %}" alt="Image of {{ i.title }}">   
+                </div>
+                {% endif %}  
+
+
+                <div class="text-center py-4 bg-card-gray">
+                    <a class="h6 text-decoration-none text-truncate" href=""> {{ i.title }} </a>
+                </div>
+            </div>             
+        </div>  
+        {% endfor %}
+</div>
+
+
+
+
+</body>
+
+{% block scripts %}
+{% endblock %}
+
+</html>
+
+
+
+

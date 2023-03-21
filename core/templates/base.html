@@ -1,0 +1,201 @@
+{% load static %}
+{% load menu %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title> {% block title %} Home {% endblock %} | Digital Product Ecommerce </title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="dpe" name="keywords">
+    <meta content="digital product ecommerce" name="description">
+
+    <!-- Favicon -->
+    <link href="{% static 'img/favicon.ico' %}" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">  
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="{% static 'lib/animate/animate.min.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row bg-secondary py-1 px-xl-2">
+    
+            <div class="col-lg-3">
+                <a href="" class="text-decoration-none">
+                    <img src="{% static 'img/logo.png' %}" alt="logo" width="30px" class="mb-1">
+                    <span class="h3 text-uppercase text-light px-2 btn-orange">Digi Seller</span>
+                </a>
+            </div>
+
+            <div class="col-lg-4 col-6 text-left mt-1">
+                <form method="get" action="{% url 'search' %}">
+                    <div class="search-container">
+                        <input type="text" class="form-control btn-light " placeholder="Search for products" name="query">
+                        <button class="search-icon">
+                          <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="d-none d-lg-block mr-5 pl-lg-6">
+                <div class="d-inline-flex align-items-center h-100 mt-1">
+                    <a class="nav-top-bar" href="{% url 'about' %}">About</a>
+                    <a class="nav-top-bar" href="{% url 'contact' %}">Contact</a>
+                    <a class="nav-top-bar" href="{% url 'help' %}">Help</a>
+                    <a class="nav-top-bar" href="{% url 'services' %}">Services</a>
+                    {% if not request.user.is_authenticated %}
+                        <a class="nav-top-bar" href="{% url 'login' %}">Login</a>
+                    {% endif %}
+            
+
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        <div class="row align-items-center bg-bluish py-3 px-xl-5 d-none">
+        </div>
+    </div>
+    <!-- Topbar End -->
+    
+    
+    <!-- Navbar Start -->
+    <div class="container-fluid bg-navbar mb-30">  <!--prevoius bg-dark-->
+        <div class="row px-xl-">
+            <div class="col-lg-3 d-none d-lg-block">
+                <a class="btn d-flex align-items-center justify-content-between" data-toggle="collapse" href="#navbar-vertical" style="height: 40px; padding: 0 30px;">
+                    <h6 class="m-0 text-dark"><i class="fa fa-bars mr-2"></i>Categories</h6>
+                    <i class="fa fa-angle-down"></i>
+                </a>
+                <nav class="collapse position-absolute navbar navbar-vertical navbar-dark align-items-start p-0 bg-dark" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 999; overflow-y: auto; max-height: 500px;">
+                    <div class="navbar-nav">
+                        <div class="nav-item dropdown dropright">
+                        {% menu %}   
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            
+            <!--gray navbar start home shop pages-->
+            <div class="col-lg-9-no-margin-right">
+                <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-0">
+                    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+    
+                    <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse" style="height: 40px; padding: 0 30px;">
+                        <div class="navbar-nav mr-auto py-0">
+                            <a href="{% url 'frontPage' %}" class="nav-item nav-link active">Home</a>
+                            <a href="{% url 'shop' %}" class="nav-item nav-link">Shop</a>
+                        </div>
+                        <a class="ml-4 mr-1 px-1" href="{% url 'cart_view' %}">
+                            <img src="{% static 'img/cart1.png' %}" alt="My account" height="35px" width="35px"> <sup>( {{ cart|length }} )</sup>
+                        </a>
+                        
+                        <div class="dropdown mr-5">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <!-- removed nav-link from class name because of black outline-->
+                                <img src="{% static 'img/user4.png' %}" alt="My account" height="35px" width="35px">
+                            </a>
+                            <div class="dropdown-menu bg-light rounded-lg border-0">
+                                {% if request.user.is_authenticated %}
+                                    <a class="dropdown-item" href="{% url 'myaccount' %}">Profile</a > <!--Set url 'myaccount'-->
+                                    <a href="{% url 'cart_view' %}" class="dropdown-item">Cart</a>
+
+
+                                    {% if request.user.is_vendor %}
+                                        <a class="dropdown-item" href="{% url 'my_store' %}">My store</a>
+                                    {% else %}
+                                        <a class="dropdown-item" href="{% url 'become_vendor' %}"> Become a vendor </a>
+                                    {% endif %} 
+                                    
+                                    <a class="dropdown-item" href="{% url 'logout' %}">Logout
+                                        <img src="{% static 'img/logout.png' %}" alt="Logout" height="20px" width="20px">
+                                    </a>
+                                    {% else %}
+                                <a class="dropdown-item" href="{% url 'login' %}">Log in</a>
+                                <a class="dropdown-item" href="{% url 'signup' %}">Register</a>    
+                                {% endif %} 
+                            </div>
+                        </div>     
+                    </div>
+
+                </nav>
+            </div>
+        </div>
+    </div>
+    <!-- Navbar End -->
+    
+    
+
+
+{% block content %}
+   <!--Top bar-->
+{% endblock %}
+
+{% block contenttodisplay %}
+    <!--men fashion-->
+{% endblock %}
+
+{% block featured %}
+    <!-- Featured product -->
+{% endblock %}
+
+{% block categories1 %}
+    <!--categories-->
+{% endblock %}
+
+{% block recent_products %}
+    <!--recent products-->
+{% endblock %}
+
+{% block vendors %}
+          <!--vendors-->
+{% endblock %}
+
+<div class="row align-items-center bg-bluish py-3 px-xl-5 d-none d-lg-flex">
+    </div>
+{% block footer %}
+    {% include 'partials/footer.html' %}  
+{% endblock %} 
+
+
+
+
+<a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+{% block scripts %}
+{% endblock %}
+
+<!-- JavaScript Libraries -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<script src="{% static 'lib/easing/easing.min.js' %}"></script>
+<script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
+
+<!-- Contact Javascript File -->
+<script src="{% static 'mail/jqBootstrapValidation.min.js' %}"></script>
+<script src="{% static 'mail/contact.js' %}"></script>
+
+<!-- Template Javascript -->
+<script src="{% static 'js/main.js' %}"></script>
+
+
+
+</body>
+
+</html>

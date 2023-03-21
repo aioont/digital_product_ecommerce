@@ -1,0 +1,45 @@
+{% load static %}
+
+<html>
+    <head><title>About | Digital Product E-commerce </title></head> 
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+<body class="text-dark">
+    <br><br><br>
+<h1>FAQ</h1>
+<ol>
+<li> What are example of digital product sell through Digital Product E-commerce ?</li>
+    <ul>
+        <li>E-books and online courses</li>
+        <li>Sell licenses of digital assests</li>
+        <li>Sell membership</li>
+        <li>Templates and tools for development</li>
+        <li>Digital art</li>
+        <li>Softwares</li>
+        <li>NFT & AR models</li>
+        <li>Pre-designed works and customizable through contacing module of seller</li>
+        <li>Research and Data</li>
+        <li>...</li>
+    </ul>
+<li> How to ensure quality of product ?</li>
+  <p> Use the preview and rating of product if it is avialable. Also you can contact seller inorder to customise the product according to your needs.</p>
+
+<li> How can i request a change on a particular product ? </li>
+<p> By using contacting option available user product details you can contact seller inorder to customise the product according to your needs.</p>
+
+</ol>
+  <address>More questions : 
+    You can reach out us through:
+    <a class="text-body mr-3" href="{% url 'contact' %}"> Leave a message </a> <br>
+    Mail : admin@gmail.com <br>
+    Phone : +91 1234567890 <br>
+  </address>
+
+
+  
+{% block footer %}
+{% include 'partials/footer.html' %}  
+{% endblock %} 
+
+
+</body>
+</html>

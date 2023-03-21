@@ -1,0 +1,96 @@
+
+{% load static %}
+
+<head>
+		<!-- Customized Bootstrap Stylesheet -->
+		<link href="{% static 'css/style.css' %}" rel="stylesheet">
+
+</head>
+<body>
+	<section class="h-100">
+		<div class="container h-100">
+			<div class="row justify-content-sm-center h-100">
+				<div class="col-xxl-4 col-xl-5 col-lg-5 col-md-7 col-sm-9">
+					<div class="text-center my-2">
+						<img src="{% static 'img/logo.png' %}" alt="logo" width="100" height="100">
+					</div>
+
+					<div class="card-footer py-3 border-0">
+						<div class="text-center">
+							Already have an account?  <a href="{% url 'login' %}" class="text-light" style="text-decoration: underline;"> Login </a>
+						</div>
+					</div>
+
+					<div class="card shadow-lg">
+						<div class="card-body p-5">
+							<h1 class="fs-4 card-title fw-bold mb-4 text-dark"> Signup</h1>
+
+                           
+
+							<form method="POST" class="needs-validation" novalidate="" autocomplete="off"> <!-- $$$$$   form here    $$$$$-->
+								{% csrf_token %}
+
+								<div class="mb-3">
+									<label class="mb-2 text-muted" for="name">First Name</label>
+									{{form.first_name}}
+									<label class="mb-2 text-muted" for="name">Last Name</label>
+									{{form.last_name}}
+									<div class="invalid-feedback">
+										Name is required	
+									</div>
+								</div>
+
+								<div class="mb-3">
+									<label class="mb-2 text-muted" for="email">E-Mail Address</label>
+									{{form.email}}
+									<div class="invalid-feedback">
+										Email is invalid
+									</div>
+								</div>
+								
+								<div class="mb-3">
+									<label class="mb-2 text-muted" for="mobile">Phone number</label>
+									{{form.mobile}}
+									<div class="invalid-feedback">
+										Mobile number is invalid
+									</div>
+								</div>
+
+								<div class="mb-3">
+									<label class="mb-2 text-muted" for="password1">Password</label>
+									{{form.password1}}
+									<label class="mb-2 text-muted" for="password2">Confirm Password</label>
+									{{form.password2}}
+								    <div class="invalid-feedback">
+								    	Password is required
+							    	</div>
+								</div>
+								{{from.errors}}
+
+								<p class="form-text text-muted mb-3">
+									By registering you agree with our terms and condition.
+								</p>
+								<div class="align-items-center d-flex justify-content-center">
+									<input type="submit" value="Register" class="btn btn-primary">
+								</div>
+								  
+							</form>
+						</div>
+						
+					</div>
+					<div class="text-center mt-5 text-muted">
+						Copyright &copy; 2022-2023 &mdash; Digital Product E-commerce
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+
+
+
+
+
+
+
+

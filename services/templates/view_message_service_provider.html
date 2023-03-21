@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}View messages of {{ product.title }} {% endblock %}
+
+{% block content %}
+<style>
+.message-container {
+    margin: 10px;
+    padding: 20px;
+    border-radius: 2em;
+}
+
+.gray-background {
+    background-color: #32315D;
+    color: #ffffff;
+}
+
+.white-background {
+    background-color: #5E67E1;
+    color: #363535;
+}
+
+.message-text {
+    list-style-type: none;
+}
+
+.message-text li {
+    margin-bottom: 10px;
+}
+
+.reply-button {
+    background-color: #ffffff;
+    color: #ff1515;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    display: block;
+    margin: auto;
+}
+
+.reply-button:hover {
+    background-color: #b2b2b2;
+}
+
+</style>
+
+<body>
+    <h1>View Message Of {{ sp_details.sp_name }} </h1>
+    {% for i in sp_msg %}
+    <div class="message-container {% cycle 'gray-background' 'white-background' %}">
+        <ul class="message-text">
+            <li><strong>Message from:</strong> {{ i.email }}</li>
+            <li><strong>Name:</strong> {{ i.name }}</li>
+            <li><strong>Message subject:</strong> {{ i.subject }}</li>
+            <li><strong>Message:</strong> {{ i.message }}</li>
+        </ul>
+        <button class="reply-button" onclick="window.location.href='mailto:{{ i.email }}'">Reply</button>
+    </div>
+    {% endfor %}
+</body>
+{% endblock %}

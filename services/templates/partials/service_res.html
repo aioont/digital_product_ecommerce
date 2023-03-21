@@ -1,0 +1,23 @@
+{% load static %}
+
+<div class="row px-xl-5 text-dark flex">
+    {% for j in services %}
+    <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+        <div class="product-item mb-4 bg-dark">
+            {% if j.image %}
+            <div class="product-img position-relative overflow-hidden">
+                 <img class = "img-fluid" src="{{ j.image.url }}" alt="Image of {{ j.title }}">                  
+            </div> 
+            {% else %}
+            <div class="product-img position-relative overflow-hidden">
+                <img class = "img-fluid" src="{% static 'img/noimg.png' %}" alt="Image of {{ j.title }}">                  
+           </div> 
+            {% endif %}
+            <div class="text-center py-4">
+                <a class="h6 text-decoration-none text-truncate" href=""> {{ j.title }} </a>
+            </div>
+            
+        </div>
+    </div>   
+    {% endfor %} 
+</div>

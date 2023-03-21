@@ -1,0 +1,45 @@
+{% load static %}
+{% block title %} 
+        {{ service.title }}
+{% endblock %}
+
+ <head>
+    <title>Digital Services </title>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+        <link href="{% static 'css/style.css' %}" rel="stylesheet">
+
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<h1 class="font-weight-bold text-dark mt-2 mb-3 ml-5" style="text-decoration: underline;">All services </h1>
+
+<div class="row px-xl-5 text-dark flex">
+    {% for i in services %}
+    <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+        <div class="product-item mb-4 bg-dark">
+            {% if i.image %}
+            <div class="product-img position-relative overflow-hidden ">
+                 <img class = "img-fluid" src="{{ i.image.url }}" alt="Image of {{ i.title }}">                  
+            </div> 
+            {% else %}
+            <div class="product-img position-relative overflow-hidden align-items-center">
+                <img class = "img-fluid" src="{% static 'img/noimg.png' %}" alt="Image of {{ i.title }}">                  
+           </div> 
+            {% endif %}
+            <div class="text-center py-4">
+                <a class="h5 text-decoration-none text-truncate" href="{% url 'services' %}"> {{ i.title }} </a>
+                <h6 class="mt-1"> Service cost : $ {{ i.price }} <small> cost may vary</small></h6>
+                <h6> Stars :  {{ i.stars }} </h6>
+            
+            </div>
+            
+        </div>
+    </div>   
+    {% endfor %}
+</div> 
+
+
+
+
+
