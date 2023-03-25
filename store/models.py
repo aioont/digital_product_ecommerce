@@ -106,7 +106,8 @@ class OrderItem(models.Model):
     order = models.ForeignKey(Order, related_name='items', on_delete=models.CASCADE)
     product = models.ForeignKey(Product, related_name='items', on_delete=models.CASCADE)
     price = models.IntegerField()
-    quantity = models.IntegerField(default=1)        
+    quantity = models.IntegerField(default=1)   
+    is_admin_paid_to_vendor = models.BooleanField(default=False, null=True)     
 
     def __str__(self):
         return self.product.title
@@ -121,13 +122,3 @@ class VendorMessage(models.Model):
     message = models.TextField(max_length=200)
     def __str__(self):
         return self.name
-
-
-
-
-
-
-
-
-
-

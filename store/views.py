@@ -21,10 +21,22 @@ from .models import Product, Category, Order, OrderItem, Vendor
 from core.forms import ContactForm
 
 
-def payment_managemant(request):
-    order = Order.objects.all()
-    order_item = OrderItem.objects.all()
-    return render(request, '.html') 
+from django.shortcuts import render, redirect
+from .models import OrderItem
+
+
+def payment_management(request):
+    if request.method == 'POST':
+        order_id = request.POST.get('order_id')
+        order_item = OrderItem.objects.get(id=order_id)
+        order_item.is_admin_paid_to_vendor = request.POST.get('is_admin_paid_to_vendor') == 'True'
+        order_item.save()
+        return redirect('payment_management')
+    else:
+        orders = OrderItem.objects.all()
+        return render(request, 'payment_management.html', {'orders': orders})
+
+
 
 def view_messages_vendor(request):
     vendor_msg = VendorMessage.objects.all()
@@ -126,7 +138,10 @@ def checkout(request):
             print("5. discount amount === ", discount_price)
             item = OrderItem.objects.create(order=order, product=product, price=discount_price, quantity=quantity)
         cart.clear()
-
+        for item in cart:
+            product = item['product']
+            product.quantity -= 1
+            product.save()
 
         return JsonResponse({'session': session, 'order': payment_intent})
         # return redirect('myaccount') on success
@@ -138,12 +153,6 @@ def checkout(request):
         'form': form,
         'pub_key': settings.STRIPE_PUB_KEY,
     })
-
-
-
-
-
-
 
 
 def search(request):

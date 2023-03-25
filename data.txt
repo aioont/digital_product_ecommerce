@@ -6,7 +6,6 @@ password:   admin123
 =========================
 
 cmd
-
 cd ../env/Scripts
 activate
 cd ../../dpe3

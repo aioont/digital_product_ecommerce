@@ -2,6 +2,8 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
+ 
+    path('payment-manage-admin/', views.payment_management, name='payment_management'),
     path('my-store/view-messages/',views.view_messages_vendor, name='view_messages_vendor'),
     
     

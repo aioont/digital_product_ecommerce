@@ -29,7 +29,7 @@ urlpatterns = [
     path('link/', link, name='link'),
     path('admin/', admin.site.urls, name='admin'),
 
-    path('admin-message', view_admin_messages, name="admin-message"),
+    #path('admin-message', view_admin_messages, name="admin-message"),
 
     path('about/', about, name='about'),
     path('contact/', contact, name='contact'),

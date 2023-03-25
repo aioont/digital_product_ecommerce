@@ -28,7 +28,11 @@
                         <h5 class="text-secondary text-uppercase mb-4">My Account</h5>
                         <div class="d-flex flex-column justify-content-start">
                             <a class="text-secondary mb-2" href="{% url 'myaccount' %}"><i class="fa fa-angle-right mr-2"></i> View account </a>
-                            <a class="text-secondary mb-2" href="{% url 'become_vendor' %}"><i class="fa fa-angle-right mr-2"></i> Become a vendor </a>
+                            {% if request.user.is_vendor %}
+                                <a class="text-secondary mb-2" href="{% url 'my_store' %}"><i class="fa fa-angle-right mr-2"></i> My store</a>
+                            {% else %}
+                                <a class="text-secondary mb-2" href="{% url 'become_vendor' %}"><i class="fa fa-angle-right mr-2"></i> Become a vendor </a>
+                            {% endif %}
                         </div>
                     </div>
 

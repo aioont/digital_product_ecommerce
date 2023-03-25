@@ -1,48 +1,124 @@
 
-<!DOCTYPE html>
-<html>
+  <!DOCTYPE html>
   <head>
     <meta charset="UTF-8">
     <title>Completed Orders</title>
+    <style>
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+      th, td {
+        text-align: left;
+        padding: 8px;
+      }
+      th {
+        background-color: #4CAF50;
+        color: white;
+      }
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+      .pay-button {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      .pay-button:hover {
+        background-color: #3e8e41;
+      }
+      .btn {
+        background-color: rgb(0, 255, 106);
+        color: rgb(53, 50, 50);
+        font-weight: bold;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      .btn:hover {
+        background-color: rgb(240, 0, 0);
+        color: white;
+        
+      }
+      .paid, .unpaid {
+        display: block;
+        text-align: center;
+      }
+
+      .paid {
+        color: green;
+        padding: 5px 10px;
+        border-radius: 5px;
+      }
+
+      .unpaid {
+        color: rgb(234, 30, 30);
+        padding: 5px 10px;
+        border-radius: 5px;
+      }
+
+
+    </style>
   </head>
   <body>
     <h1>Completed Orders</h1>
-    <table>
-      <thead>
-        <tr>
-          <th>Order ID</th>
-          <th>Customer Name</th>
-          <th>Product Name</th>
-          <th>Vendor Name</th>
-          <th>Price</th>
-          <th>Payment Status</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for order in completed_orders %}
-          {% for item in order.items.all %}
-            <tr>
-              <td>{{ order.order_id }}</td>
-              <td>{{ order.full_name }} </td>
-              <td>{{ item.product.title }}</td>
-              <td>{{ item.product.vendor }}</td>
-              <td>{{ item.get_display_price }}</td>
-              <td>{% if order.is_paid %}Paid{% else %}Pending{% endif %}</td>
-              <td>{% if not order.is_paid %}
-                    <form method="POST" action="{% url 'send_payment' %}">
-                      {% csrf_token %}
-                      <input type="hidden" name="order_id" value="{{ order.order_id }}">
-                      <input type="hidden" name="vendor_name" value="{{ item.product.vendor }}">
-                      <input type="number" name="amount" placeholder="Enter amount">
-                      <button type="submit">Send Payment</button>
-                    </form>
-                  {% endif %}
-              </td>
-            </tr>
-          {% endfor %}
+
+    {% block content %}
+      <h1>Orders</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>Order ID</th>
+            <th>Customer Name</th>
+            <th>Product Name</th>
+            <th>Vendor Name</th>
+            <th>Vendor Mail</th>
+            <th>Price</th>
+            <th>Payment Status</th>
+            <th>Pay to Vendor</th>
+            <th>Paid to Vendor</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for order in orders %}
+          <tr>
+            <td>{{ order.order.order_id }}</td>
+            <td>{{ order.order.full_name }}</td>
+            <td>{{ order.product.title }}</td>
+            <td>{{ order.product.user.vendors.first.vendor_name }}</td>
+            <td>{{ order.product.user.vendors.first.vendor_email }}</td>
+            <td>{{ order.product.discount_price }}</td>
+            <td>{% if order.order.is_paid %}Paid{% else %}Unpaid{% endif %}</td>
+            <td><a href="https://buy.stripe.com/test_fZeeVEe2Y7vQ3kI6op"> Pay {{order.product.discount_price}} </a></td>
+            <td>
+              <form method="post" class="form-check">
+                  {% csrf_token %}
+                  <input type="checkbox" name="is_admin_paid_to_vendor" class="form-check-input" value="True" {% if order.is_admin_paid_to_vendor %}checked{% endif %}>
+                  <input type="hidden" name="order_id" value="{{ order.id }}">
+                  <button type="submit" class="btn btn-primary">Change</button>
+              </form>
+              {% if order.is_admin_paid_to_vendor %}
+                  <span class="paid">Paid</span>
+              {% else %}
+                  <span class="unpaid">Unpaid</span>
+              {% endif %}
+
+          </td>
+          
         {% endfor %}
-      </tbody>
-    </table>
+
+        </tbody>
+      </table>
+    {% endblock %}
+
+
+    </script>
+    
+    
   </body>
-</html>
+  </html>

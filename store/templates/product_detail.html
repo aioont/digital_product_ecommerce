@@ -101,9 +101,15 @@
                             </div>
                             <small class="pt-1 text-dark">{{ product.rating }}</small>
                         </div>
+
                         <div class="d-flex align-items-center mb-4 pt-2">
-                            <a class="btn btn-primary px-3" href="{% url 'add_to_cart' product.id %}"><i class="fa fa-shopping-cart mr-1"></i> Add To Cart </a>
+                            {% if product.discount_price == 0 %}
+                            <a href="{{ product.digital_product.url }}" class="btn btn-primary px-3" download>Download {{ product.title }}</a>
+                            {% else %}
+                            <a href="{% url 'add_to_cart' product.id %}" class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To Cart </a>
+                            {% endif %}
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -170,7 +176,7 @@
     <a href= "{% url 'frontPage' %}" class="btn bgof text-dark" style="margin-top: 2%; margin-left: 4%; margin-bottom: 1%;" > Go back to homepage </a>
     <!-- Contact Start -->
     <div class="container-fluid">
-        <h2 class="section-title position-relative mx-xl-5 mb-4"><span class="bg-heading pr-3">Contact Provider</span></h2>
+        <h2 class="section-title position-relative mx-xl-5 mb-4"><span class="bg-heading pr-3">Contact Vendor</span></h2>
         <div class="row px-xl-5">
             <div class="col-lg-7 mb-5">
                 <div class="contact-form bg-light p-30 text-dark">

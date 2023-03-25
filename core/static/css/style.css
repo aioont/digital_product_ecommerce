@@ -2478,6 +2478,8 @@ fieldset:disabled a.btn {
 
 .btn-success {
   color: #fff;
+  border-radius: 8px;
+  border: 1px solid rgb(52, 52, 52) !important;
   background-color: #28a745;
   border-color: #28a745;
 }

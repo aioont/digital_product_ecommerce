@@ -82,6 +82,15 @@ outline-offset: -4px;
     <a href="{% url 'logout' %}" class="btn btn-danger ml-3 mr-3 mt-3 mb-3"> Log out </a>
 </div>
 
+{% if user.is_superuser %}
+<hr>
+<h3 class="text-md mb-4"> - Admin Dashboard </h3>
+<div class="mt-3 mb-3 d-flex justify-content-center">    
+    <a class="btn-success btn ml-3 mr-3 mt-3 mb-3" href="{% url 'payment_management' %}">Payment management</a>
+    <a class="btn-success btn ml-3 mr-3 mt-3 mb-3" href="{% url 'admin_messages' %}"> View and reply messages</a>
+</div>
+{% endif %}
+
 
 <hr>
 {% if orders %}
