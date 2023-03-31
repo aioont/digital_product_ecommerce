@@ -111,8 +111,8 @@ def checkout(request):
                 payment_method_types = ['card'],
                 line_items = items,
                 mode = 'payment',
-                success_url = f'{settings.WEBSITE_URL}cart/checkout/success/',
-                cancel_url = f'{settings.WEBSITE_URL}cart/',
+                success_url = f'{settings.WEBSITE_URL}/cart/checkout/success/',
+                cancel_url = f'{settings.WEBSITE_URL}/cart/',
         )
             
         payment_intent = session.payment_intent 
