@@ -91,20 +91,23 @@ def checkout(request):
         # Validate the form data
         if full_name and email and mobile and address:
             form = OrderForm(request.POST)
-
+            
+            total_price = 0
             # Create the line items for the Stripe checkout session
             items = []
             for product_id, item_data in cart.cart.items():
                 item = cart.get_item(product_id)  # Use the get_item() method to get the product info
                 if item:
+
                     product = item['product']
+                    total_price += product.discount_price * int(item['quantity']) * 100
                     items.append({
                         'price_data': {
                             'currency': 'usd',
                             'product_data': {
                                 'name': product.title,
                             },
-                            'unit_amount': int(product.discount_price * item['quantity'] * 100),
+                            'unit_amount': total_price,
                         },
                         'quantity': item['quantity']
                     })
@@ -126,7 +129,7 @@ def checkout(request):
                 email=email,
                 mobile=mobile,
                 address=address,
-                paid_amount=cart.get_total_cost() / 100,
+                paid_amount=total_price / 100,
                 is_paid=True,
                 order_id=uuid.uuid4(),
                 payment_intent=payment_intent,
@@ -139,9 +142,9 @@ def checkout(request):
                 if item:
                     product = item['product']
                     quantity = item['quantity']
-                    discount_price = int(product.discount_price * quantity * 100)
+                    discount_price = int(product.discount_price * quantity)
                     order_item = OrderItem.objects.create(order=order, product=product, price=discount_price, quantity=quantity)
-                    product.quantity -= quantity
+                    product.quantity -= 1
                     product.save()
 
             # Clear the cart after the order is complete

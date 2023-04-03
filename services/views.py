@@ -14,10 +14,6 @@ def view_messages_service_provider(request):
         'sp_msg': sp_msg,
     })
 
-
-
-
-
 def view_service(request, service_provider, service_name):
     service = Services.objects.get(title=service_name, service_provider__sp_name=service_provider, status='active')
     service_provider = ServiceProvider.objects.filter(sp_name=service_provider).first()
@@ -73,7 +69,7 @@ def services(request):
     return render(request, 'services.html', {
     'popular_service_providers': popular_service_providers,
     'popular_services': popular_services,
-    'all_services': all_services
+    'all_services': all_services,
     })
 
 
