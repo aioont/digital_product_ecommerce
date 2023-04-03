@@ -45,8 +45,11 @@ def view_messages_vendor(request):
     })
 
 
-def success(request):
-    return render(request, 'success.html')
+def success(request, product_id):
+    product = Product.objects.filter(id=product_id)
+    return render(request, 'success.html', {
+        product_id: 'product_id'
+    })
 
 def add_to_cart(request, product_id):
     cart = Cart(request)
@@ -72,87 +75,101 @@ def cart_view(request):
 def checkout(request):
     cart = Cart(request)
 
+    # Check if the cart is empty
     if cart.get_total_cost() == 0:
         return redirect('cart_view')
 
+    # Process the order
     if request.method == 'POST':
+        # Parse the form data from the request body
         data = json.loads(request.body)
         full_name = data['full_name']
         email = data['email']
         mobile = data['mobile']
         address = data['address']
 
+        # Validate the form data
         if full_name and email and mobile and address:
             form = OrderForm(request.POST)
 
-
-            total_price = 50
+            # Create the line items for the Stripe checkout session
             items = []
-            print("1. total_price === ", total_price)
-            for item in cart:
-                product = item['product']
-                total_price += product.discount_price * int(item['quantity'])
-                print("2. total_price += product.discount_price * int(item['quantity']) === ", total_price)
-
-                items.append({
-                    'price_data': {
-                        'currency': 'usd',
-                        'product_data': {
-                            'name': product.title,
+            for product_id, item_data in cart.cart.items():
+                item = cart.get_item(product_id)  # Use the get_item() method to get the product info
+                if item:
+                    product = item['product']
+                    items.append({
+                        'price_data': {
+                            'currency': 'usd',
+                            'product_data': {
+                                'name': product.title,
+                            },
+                            'unit_amount': int(product.discount_price * item['quantity'] * 100),
                         },
-                        'unit_amount': product.discount_price,
-                    },
-                    'quantity': item['quantity']
-                })
-                
-            #print("3. discount_price === ", discount_price)
+                        'quantity': item['quantity']
+                    })
+
+            # Create the Stripe checkout session
             stripe.api_key = settings.STRIPE_SECRET_KEY
             session = stripe.checkout.Session.create(
-                payment_method_types = ['card'],
-                line_items = items,
-                mode = 'payment',
-                success_url = f'{settings.WEBSITE_URL}cart/checkout/success/',
-                cancel_url = f'{settings.WEBSITE_URL}cart/',
-        )
-            
-        payment_intent = session.payment_intent 
+                payment_method_types=['card'],
+                line_items=items,
+                mode='payment',
+                success_url=f'{settings.WEBSITE_URL}{product_id}/cart/checkout/success',
+                cancel_url=f'{settings.WEBSITE_URL}/cart/',
+            )
+            payment_intent = session.payment_intent 
 
-        order = Order.objects.create(
-            full_name = full_name,
-            email = email,
-            mobile = mobile,
-            address = address,
-            paid_amount = total_price,
-            is_paid = True,
-            order_id = uuid.uuid4(),
-            payment_intent = payment_intent,
-            created_by = request.user,  
-        )
-        print("4. paid amount = total_price  === ", total_price)
+            # Create the order and order items
+            order = Order.objects.create(
+                full_name=full_name,
+                email=email,
+                mobile=mobile,
+                address=address,
+                paid_amount=cart.get_total_cost() / 100,
+                is_paid=True,
+                order_id=uuid.uuid4(),
+                payment_intent=payment_intent,
+                created_by=request.user,
+            )
+            #product_id = item['product_id']
+            print(product_id)
+            for product_id, item_data in cart.cart.items():
+                item = cart.get_item(product_id)  # Use the get_item() method to get the product info
+                if item:
+                    product = item['product']
+                    quantity = item['quantity']
+                    discount_price = int(product.discount_price * quantity * 100)
+                    order_item = OrderItem.objects.create(order=order, product=product, price=discount_price, quantity=quantity)
+                    product.quantity -= quantity
+                    product.save()
 
+            # Clear the cart after the order is complete
+            cart.clear()
+
+            # Return the Stripe checkout session and order data as JSON
+            return JsonResponse({'session': session, 'order': payment_intent})
         
-        for item in cart:
-            product = item['product']
-            quantity = int(item['quantity'])
-            discount_price = product.discount_price * quantity * 100
-            print("5. discount amount === ", discount_price)
-            item = OrderItem.objects.create(order=order, product=product, price=discount_price, quantity=quantity)
-        cart.clear()
-        for item in cart:
-            product = item['product']
-            product.quantity -= 1
-            product.save()
+        # If the form data is invalid, render the checkout page with an error message
+        else:
+            form = OrderForm()
+            return render(request, 'checkout.html', {
+                'cart': cart,
+                'form': form,
+                'error_message': 'Please fill out all fields.',
+                'pub_key': settings.STRIPE_PUB_KEY,
+            })
 
-        return JsonResponse({'session': session, 'order': payment_intent})
-        # return redirect('myaccount') on success
+    # If the request method is not POST, render the checkout page with the order form and cart data
     else:
         form = OrderForm()
+        return render(request, 'checkout.html', {
+            'cart': cart,
+            'form': form,
+            'pub_key': settings.STRIPE_PUB_KEY,
+        })
 
-    return render(request, 'checkout.html', {
-        'cart': cart,
-        'form': form,
-        'pub_key': settings.STRIPE_PUB_KEY,
-    })
+   
 
 
 def search(request):

@@ -16,7 +16,8 @@ class Cart(object):
             self.cart[str(p)]['product'] = Product.objects.get(pk=p) # all info about product insert into self.cart[str(p)]['product'] 
 
         for item in self.cart.values():
-            item['total_price'] = int(item['product'].discount_price * item['quantity']) 
+            item['total_price'] = int(item['product'].discount_price * item['quantity']) #/ 100
+            
 
             yield item #The yield statement suspends a function’s execution and sends a value back to the caller, but retains enough state to enable the function to resume where it left o
     def __len__(self):
@@ -53,7 +54,8 @@ class Cart(object):
         for p in self.cart.keys():
             self.cart[str(p)]['product'] = Product.objects.get(pk=p)
 
-        return int(sum(item['product'].discount_price * item['quantity'] for item in self.cart.values()))  # price * quantity for each item
+        return int(sum(item['product'].discount_price * item['quantity'] for item in self.cart.values())) # *100 price * quantity for each item
+        
     
     def get_item(self, product_id):
         if str(product_id) in self.cart:

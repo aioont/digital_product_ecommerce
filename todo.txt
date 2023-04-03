@@ -1,8 +1,13 @@
+1. payment_intent not created 
+2. Order created before payment completion
+3. 
+
+
 DONE 1. featured product returns inverted 
 DONE 2. vendor link not works
 3. rating printing not working
-4. payment
-5. reduce quanity when ordered
+DONE 4. payment
+DONE 5. reduce quanity when ordered
 6. fix service urls
 
 

@@ -54,6 +54,9 @@ class Product(models.Model):
     def __str__(self):
         return self.title
     
+    def get_display_price(self):
+        return self.price / 100
+    
 
 
 class Vendor(models.Model):
@@ -88,7 +91,7 @@ class Vendor(models.Model):
 
 class Order(models.Model):
     full_name = models.CharField(max_length=50, null=True)
-    email = models.EmailField(unique=True, max_length=50)
+    email = models.EmailField(max_length=50)
     mobile = models.CharField(max_length=15, null=True, blank=True)
     address = models.TextField(blank=True)
     paid_amount = models.IntegerField(blank=True, null=True)
@@ -98,6 +101,9 @@ class Order(models.Model):
     
     created_by = models.ForeignKey(User, related_name='orders', on_delete=models.SET_NULL, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
+
+    def get_display_price(self):
+        return self.price / 100
     
     def __str__(self):
         return self.email  # change this to created_b if possible
@@ -112,8 +118,8 @@ class OrderItem(models.Model):
     def __str__(self):
         return self.product.title
 
-    def get_display_price(self):
-        return self.price
+    # def get_display_price(self):
+    #     return self.price / 100
     
 class VendorMessage(models.Model):
     name = models.CharField(max_length=50)
