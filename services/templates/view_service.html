@@ -9,7 +9,6 @@
 {% load static %}
 <head>
 
-
     <!-- Libraries Stylesheet -->
     <link href="{% static 'lib/animate/animate.min.css' %}" rel="stylesheet">
     <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
@@ -58,14 +57,24 @@
                             </div>
                             {% else %}
                             <div class="product-img position-relative overflow-hidden">
-                                <img class="img-fluid" src="{% static 'img/logo.png' %}" alt="Image of {{ service.title }}">   
+                                <img class="img-fluid" src="{% static 'no-pictures.png' %}" alt="Image of {{ service.title }}">   
                             </div>
                             {% endif %}
                         </div>
 
                         <div class="carousel-item">
-                            <img class="w-100 h-100" src="{{ service.video.url }}" alt="Image of {{ service.title }}">
-                        </div>
+                            {% if service.video %}
+                                <video controls width="640" height="360">
+                                    <source src="{{ service.video.url }}" type="{{ service.video.content_type }}">
+                                </video>
+                            {% endif %}
+                        </div> 
+
+
+
+
+
+
                     </div>
                     <a class="carousel-control-prev" href="#product-carousel" data-slide="prev">
                         <i class="fa fa-2x fa-angle-left text-dark"></i>
@@ -89,9 +98,9 @@
                     </div>
 
                     <div class="d-flex align-items-center mb-4 pt-2">
-                        <a class="btn btn-primary px-3" href="{% url 'contactProvider' service.service_provider.sp_name service.title %}"><i class="fa fa-shopping-cart mr-1"></i> Contact to know about service </a>
+                        <a class="btn btn-primary px-3" href="mailto:{{ service.service_provider.sp_email }}?subject=Inquiry about {{ service.title }}"><i class="fa fa-envelope mr-1"></i> Contact to know about service </a>
                     </div>
-
+                    
                 </div>
             </div>
         </div>
@@ -122,8 +131,8 @@
         </div>
     </div>
     <!-- Service Detail End -->
-<center>
-    <a href= "{% url 'contactProvider' service.service_provider.sp_name service.title %}" class="btn bgof text-dark" style="margin-top: 2%; margin-left: 4%; margin-bottom: 1%;" > Contact <strong>{{ service.service_provider.sp_name }}</strong> to know about  <strong>{{ service.title }}</strong></a>
+<center class="mb-4">
+    <a href="mailto:{{ service.service_provider.sp_email }}?subject=Inquiry about {{ service.title }}" class="btn bgof text-dark" style="margin-top: 2%; margin-left: 4%; margin-bottom: 1%;" > Contact <strong>{{ service.service_provider.sp_name }}</strong> to know about  <strong>{{ service.title }}</strong></a>
     <a href= "{% url 'services' %}" class="btn bgof text-dark" style="margin-top: 2%; margin-left: 4%; margin-bottom: 1%;" > Goto services home </a>
     <a href= "{% url 'frontPage' %}" class="btn bgof text-dark" style="margin-top: 2%; margin-left: 4%; margin-bottom: 1%;" > Goto home page</a>
 </center>

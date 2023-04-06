@@ -1,13 +1,8 @@
 1. payment_intent not created 
 2. Order created before payment completion
-3. 
-
-
-DONE 1. featured product returns inverted 
-DONE 2. vendor link not works
-3. rating printing not working
-DONE 4. payment
-DONE 5. reduce quanity when ordered
+3. Category images not working
+4. Filter admin messages based on seller
+5. rating printing not working
 6. fix service urls
 
 

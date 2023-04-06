@@ -9,7 +9,7 @@
         <div class="owl-carousel vendor-carousel">
         {% for i in vendors %}
           <div  class="ml-1 mr-1 text-center bg-vendor">
-            {% if vendors.image %}
+            {% if i.vendor_image %}
                 <div class="overflow-hidden img-thumbnail" style="width: 150px; height: 100px;">
                     <img src="{{ i.vendor_image.url }}" alt="vendor_image" class="img-thumbnail">
                 </div>

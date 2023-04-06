@@ -77,6 +77,8 @@ class Vendor(models.Model):
     vendor_address = models.CharField(null=True,max_length=255)
     vendor_image = models.ImageField(upload_to='uploads/vendor_images/', blank=True, null=True)
 
+    print(user)
+
     def save(self, *args, **kwargs):
         if not self.user:
             raise ValueError('A CustomUser instance is required for saving a BecomeVendor instance')

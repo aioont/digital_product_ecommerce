@@ -10,7 +10,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 
 from core.models import Contact
-from services.models import ProviderMessage
+# from services.models import ProviderMessage
 from store.models import VendorMessage
 
 

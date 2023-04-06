@@ -1,28 +1,6 @@
 from django import forms
-from .models import ProviderMessage
+# from .models import ProviderMessage
 from core.models import AdminMessage
-
-
-
-class ProviderMessageForm(forms.ModelForm):
-    class Meta:
-        model = ProviderMessage
-        fields = ['name', 'email', 'message']
-        widgets = {
-            'name': forms.TextInput(attrs={'placeholder': 'Full name'}),
-            'email': forms.EmailInput(attrs={'placeholder': 'Email address'}),
-            'message': forms.Textarea(attrs={'placeholder': 'Your query about service ...'}),
-        }
-
-    def clean_subject(self):
-        return "Query about service %s" % self.cleaned_data['subject']
-    labels = {
-            'subject': '',  
-        }
-    widgets = {
-            'subject': forms.HiddenInput(),
-        }
-
 
 class AdminMessageForm(forms.ModelForm):
     class Meta:
@@ -39,6 +17,28 @@ class AdminMessageForm(forms.ModelForm):
         super(AdminMessageForm, self).__init__(*args, **kwargs)
         self.fields['name'].required = False
         self.fields['email'].required = False
+
+# class ProviderMessageForm(forms.ModelForm):
+#     class Meta:
+#         model = ProviderMessage
+#         fields = ['name', 'email', 'message']
+#         widgets = {
+#             'name': forms.TextInput(attrs={'placeholder': 'Full name'}),
+#             'email': forms.EmailInput(attrs={'placeholder': 'Email address'}),
+#             'message': forms.Textarea(attrs={'placeholder': 'Your query about service ...'}),
+#         }
+
+#     def clean_subject(self):
+#         return "Query about service %s" % self.cleaned_data['subject']
+#     labels = {
+#             'subject': '',  
+#         }
+#     widgets = {
+#             'subject': forms.HiddenInput(),
+#         }
+
+
+
 
 
 

@@ -9,7 +9,7 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
 </head>
 
-<body>
+<body style="background-color: #33e7a8 !important;">
     <div class="container-fluid bg-services-navbar mb-30">  <!--prevoius bg-dark-->
         <div class="row">
             <div class="col-lg-3 d-none d-lg-block bg-light">
@@ -23,7 +23,8 @@
                     <div class="navbar-nav">
                         <div class="nav-item dropdown dropright">
                         {% for i in all_services %}
-                            <a href="{% url 'services' %}" class="nav-item nav-link" > {{ i.title }} </a>
+                            <a href="#" class="nav-item nav-link" > {{ i.title }} </a>
+
                         {% endfor %} 
                         </div>
                     </div>
@@ -44,7 +45,7 @@
 
             <div class="mt-3">
                 <a href="{% url 'frontPage' %}" class="text-dark mr-3 font-weight-bolder"> Goto Home </a>
-                <a href="#" class="text-dark mr-3 font-weight-bolder"> View all services </a>
+                <a href="" class="text-dark mr-3 font-weight-bolder"> View all services </a>
                 {% if request.user.is_authenticated %}
                     <a href="{% url 'contactAdmin' %}" class="text-dark mr-1 font-weight-bolder"> Request to add a services </a>
                 {% endif %}

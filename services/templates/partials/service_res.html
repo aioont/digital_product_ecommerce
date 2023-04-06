@@ -1,23 +1,25 @@
 {% load static %}
 
 <div class="row px-xl-5 text-dark flex">
-    {% for j in services %}
+    {% for i in services %}
     <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
         <div class="product-item mb-4 bg-dark">
-            {% if j.image %}
-            <div class="product-img position-relative overflow-hidden">
-                 <img class = "img-fluid" src="{{ j.image.url }}" alt="Image of {{ j.title }}">                  
+            {% if i.image %}
+            <div class="product-img position-relative overflow-hidden ">
+                 <img class = "img-fluid" src="{{ i.image.url }}" alt="Image of {{ i.title }}">                  
             </div> 
             {% else %}
-            <div class="product-img position-relative overflow-hidden">
-                <img class = "img-fluid" src="{% static 'img/noimg.png' %}" alt="Image of {{ j.title }}">                  
+            <div class="product-img position-relative overflow-hidden align-items-center">
+                <img class = "img-fluid" src="{% static 'img/noimg.png' %}" alt="Image of {{ i.title }}">                  
            </div> 
             {% endif %}
             <div class="text-center py-4">
-                <a class="h6 text-decoration-none text-truncate" href=""> {{ j.title }} </a>
+                <a class="h5 text-decoration-none text-truncate text-light" href="{% url 'view_service' i.service_provider.sp_name i.title %}"> {{ i.title }} </a>
+                <h6 class="mt-1 text-light"> Service cost : $ {{ i.price }} <small> cost may vary</small></h6>
+                <h6 class="text-light"> Stars :  {{ i.stars }} </h6>
             </div>
             
         </div>
     </div>   
-    {% endfor %} 
-</div>
+    {% endfor %}
+</div> 

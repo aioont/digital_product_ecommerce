@@ -26,11 +26,8 @@ urlpatterns = [
     path('', frontPage, name='frontPage'),
     path('allsuccess/', allsuccess, name='allsuccess'),
     path('view_admin_messages/', view_admin_messages, name='admin_messages'),
-    path('link/', link, name='link'),
+    path('view_general_messages/', view_general_messages, name='general_messages'),
     path('admin/', admin.site.urls, name='admin'),
-
-    #path('admin-message', view_admin_messages, name="admin-message"),
-
     path('about/', about, name='about'),
     path('contact/', contact, name='contact'),
     path('help/', help, name='help'),

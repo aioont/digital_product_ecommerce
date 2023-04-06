@@ -5,14 +5,16 @@
 
 {% block content %} 
 <h1 class="text-2xl">{{ category.title }} products</h1>
+<center>
+    <img src="{{ category.img.url }}" alt="{{ category.title }}" width="500">
+</center>
 
-    {% include 'partials/products.html' %}  
+{% include 'partials/products.html' %}  
 
 {% endblock %}
 
-
 <!-- Vendor Start -->
 {% block vendors %}
-    {% include 'partials/vendors.html' %}  
+{% include 'partials/vendors.html' %}  
 {% endblock %}
 <!-- Vendor End -->

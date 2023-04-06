@@ -16,6 +16,11 @@ def view_admin_messages(request):
     return render(request, 'view-messages-admin.html',{
         'admin_msg': admin_msg,
     })
+def view_general_messages(request):
+    general_msg = Contact.objects.all()
+    return render(request, 'view-general-messages.html',{
+        'general_msg': general_msg,
+    })
 
 def frontPage(request):
     products = Product.objects.filter(status=Product.ACTIVE).order_by('-id')[0:6]
@@ -56,11 +61,6 @@ def detail(request):
 
 def checkout(request):
     return render(request, 'checkout.html')
-
-
-def link(request):
-    return render(request, 'link.html')
-
 
     
 
