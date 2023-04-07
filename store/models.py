@@ -77,7 +77,6 @@ class Vendor(models.Model):
     vendor_address = models.CharField(null=True,max_length=255)
     vendor_image = models.ImageField(upload_to='uploads/vendor_images/', blank=True, null=True)
 
-    print(user)
 
     def save(self, *args, **kwargs):
         if not self.user:
@@ -100,7 +99,7 @@ class Order(models.Model):
     is_paid = models.BooleanField(default=False)
     order_id = models.CharField(max_length=255)
     payment_intent = models.CharField(max_length=255, null=True)
-    
+
     created_by = models.ForeignKey(User, related_name='orders', on_delete=models.SET_NULL, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 

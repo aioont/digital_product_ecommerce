@@ -100,6 +100,7 @@ def checkout(request):
                 if item:
 
                     product = item['product']
+                    price = int(product.discount_price * item['quantity'] * 100)
                     total_price += product.discount_price * int(item['quantity']) * 100
                     items.append({
                         'price_data': {
@@ -107,7 +108,7 @@ def checkout(request):
                             'product_data': {
                                 'name': product.title,
                             },
-                            'unit_amount': total_price,
+                            'unit_amount': price,
                         },
                         'quantity': item['quantity']
                     })

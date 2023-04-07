@@ -4,6 +4,7 @@
 4. Filter admin messages based on seller
 5. rating printing not working
 6. fix service urls
+7. Success link broken in hosting
 
 
 ** box-sizing class to fix different height for product card

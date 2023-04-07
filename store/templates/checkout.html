@@ -14,30 +14,6 @@
     <div class="container-fluid">
         {{ form.as_p }}
         <div id="errors" class="hidden my-3 px-4 py-4 bg-red-200 rounded-xl"></div>
-        <!-- <div class="row px-xl-5">
-    
-                <div class="bg-light p-30 mb-5">
-                    <div class="row">
-                        <div class="col-md-6 form-group">
-                            <label for="full_name" id="id_full_name">First Name</label>
-                            { {form.full_name } }
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label for="email" id="id_email">E-mail</label> 
-                            { { form.email } }
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label for="mobile" id="id_mobile">Mobile No</label>
-                            { { form.mobile } }
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label for="address" id="id_address">Address </label>
-                            { { form.address } }
-                        </div>
-                    </div>                              
-                </div>       
-        </div> -->
-
             
                 <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-heading pr-3">Order Total</span></h5>
                 <div class="bg-light p-30 mb-5">
@@ -128,9 +104,6 @@
             return true;
         }
     }
-
-
-
 
             function buy(event) {
               event.preventDefault();
