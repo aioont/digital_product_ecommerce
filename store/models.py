@@ -126,6 +126,6 @@ class VendorMessage(models.Model):
     name = models.CharField(max_length=50)
     subject = models.CharField(max_length=100, default="Querry about product ")
     email = models.EmailField()
-    message = models.TextField(max_length=200)
+    message = models.TextField(blank=True)
     def __str__(self):
         return self.name

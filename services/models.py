@@ -26,7 +26,7 @@ class ServiceProvider(models.Model):
     sp_name = models.CharField(max_length=50)
     sp_email = models.EmailField(null=True, blank=True)
     sp_image = models.ImageField(upload_to='uploads/service_provider_image/', blank=True)
-    sp_contact = models.TextField(max_length=200)
+    sp_contact = models.TextField()
     sp_star = models.IntegerField(null=True)
 
     def __str__(self):
