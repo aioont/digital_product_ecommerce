@@ -5,7 +5,7 @@ urlpatterns = [
     path('services/', views.services, name='services'), 
     path('search_services/', views.search_services, name='search_services'),
     path('services/<str:service_provider_services>/', views.view_service_category, name='view_service_category'),
-    path('services/<str:service_provider>/<str:service_name>/', views.view_service, name='view_service'),
+    path('services/<int:service_id>/', views.view_service, name='view_service'),
     path('contact-admin/', views.contactAdmin, name='contactAdmin'),
     path('all-services/',views.all_services, name='all_services'),
 

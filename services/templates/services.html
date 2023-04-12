@@ -23,7 +23,7 @@
                     <div class="navbar-nav">
                         <div class="nav-item dropdown dropright">
                         {% for i in all_services %}
-                            <a href="#" class="nav-item nav-link" > {{ i.title }} </a>
+                            <a href="{% url 'view_service' i.id   %}" class="nav-item nav-link" > {{ i.title }} </a>
 
                         {% endfor %} 
                         </div>

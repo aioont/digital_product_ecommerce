@@ -8,13 +8,13 @@ from django.contrib.auth.decorators import login_required
 
 
 
-def view_service(request, service_provider, service_name):
-    service = Services.objects.get(title=service_name, service_provider__sp_name=service_provider, status='active')
-    service_provider = ServiceProvider.objects.filter(sp_name=service_provider).first()
+def view_service(request, service_id):
+    service = Services.objects.filter(id=service_id)
+    #service_provider = ServiceProvider.objects.filter(id=service_provider_id)
     
     return render(request, 'view_service.html', {
         'service': service,
-        'service_provider': service_provider,
+        #'service_provider': service_provider,
     })
 
 @login_required
