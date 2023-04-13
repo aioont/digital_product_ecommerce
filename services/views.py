@@ -7,16 +7,19 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
 
+def all_service(request):
+    services = Services.objects.all()
+    return render(request, 'all_services.html', {'services':services})
+
 
 def view_service(request, service_id):
-    service = Services.objects.filter(id=service_id)
-    #service_provider = ServiceProvider.objects.filter(id=service_provider_id)
+    service = Services.objects.get(id=service_id)
+    service_provider = ServiceProvider.objects.filter(id=service_id)
     
     return render(request, 'view_service.html', {
         'service': service,
-        #'service_provider': service_provider,
+        'service_provider': service_provider,
     })
-
 @login_required
 def contactAdmin(request):
     user = request.user
@@ -68,9 +71,9 @@ def all_services(request):
 
     })
 
-def view_service_category(request, service_provider_services):
-    service_provider = get_object_or_404(ServiceProvider, sp_name=service_provider_services) 
-    services = Services.objects.filter(status=Services.ACTIVE, service_provider=service_provider)
+def view_service_category(request, service_provide_id):
+    service_provider = get_object_or_404(ServiceProvider,id=service_provide_id) 
+    services = Services.objects.filter(id=service_provide_id)
     return render(request, 'view_service_category.html', { 
         'service_provider': service_provider,
         'services': services,  

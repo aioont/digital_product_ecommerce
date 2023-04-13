@@ -14,7 +14,7 @@
                 {% endif %}  
                 
                 <div class="text-center py-4">
-                    <a class="h5 text-decoration-none text-truncate" href="{% url 'services' %}"> {{ service_provider.sp_name}} </a>
+                    <a class="h5 text-decoration-none text-truncate" href="{% url 'view_service_category' service_provide_id=service_provider.id  %}"> {{ service_provider.sp_name}} </a>
                         <h5>Email : {{ service_provider.sp_email }} </h5>
                         <h5 class="mt-1"> Service provider contact : {{ service_provider.sp_contact }} </h5>
                         <h5>Service provider stars : {{ service_provider.sp_star }} </h5>

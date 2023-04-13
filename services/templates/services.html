@@ -45,7 +45,7 @@
 
             <div class="mt-3">
                 <a href="{% url 'frontPage' %}" class="text-dark mr-3 font-weight-bolder"> Goto Home </a>
-                <a href="" class="text-dark mr-3 font-weight-bolder"> View all services </a>
+                <a href="{% url 'all_services' %}" class="text-dark mr-3 font-weight-bolder"> View all services </a>
                 {% if request.user.is_authenticated %}
                     <a href="{% url 'contactAdmin' %}" class="text-dark mr-1 font-weight-bolder"> Request to add a services </a>
                 {% endif %}
@@ -93,7 +93,7 @@
                         </div>
                     {% endif %}   
                 <div class="text-center py-4 bg-card-gray">
-                    <a class="h6 text-decoration-none text-truncate" href="">   {{ i.sp_name }} </a>
+                    <a class="h6 text-decoration-none text-truncate" href="{% url 'view_service_category' service_provide_id=i.id  %}">   {{ i.sp_name }} </a>
                 </div>
                 {% else %}
                 <hr>
@@ -126,7 +126,7 @@
 
 
                 <div class="text-center py-4 bg-card-gray">
-                    <a class="h6 text-decoration-none text-truncate" href=""> {{ i.title }} </a>
+                    <a class="h6 text-decoration-none text-truncate" href="{% url 'view_service' service_id=i.id %}"> {{ i.title }} </a>
                 </div>
             </div>             
         </div>  

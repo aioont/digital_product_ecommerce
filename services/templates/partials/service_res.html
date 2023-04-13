@@ -14,7 +14,7 @@
            </div> 
             {% endif %}
             <div class="text-center py-4">
-                <a class="h5 text-decoration-none text-truncate text-light" href="{% url 'view_service' i.service_provider.sp_name i.title %}"> {{ i.title }} </a>
+                <a class="h5 text-decoration-none text-truncate text-light" href="{% url 'view_service' service_id=i.id %}"> {{ i.title }} </a>
                 <h6 class="mt-1 text-light"> Service cost : $ {{ i.price }} <small> cost may vary</small></h6>
                 <h6 class="text-light"> Stars :  {{ i.stars }} </h6>
             </div>
